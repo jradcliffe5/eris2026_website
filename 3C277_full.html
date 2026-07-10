@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>ERIS2024 - 3C277.1 full tutorial</title>
+		<title>ERIS2026 - 3C277.1 full tutorial</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -15,6 +15,7 @@
 		<script type="text/javascript" async src="assets/MathJax/MathJax.js%3Fconfig=TeX-MML-AM_CHTML">
 		</script>
 		<link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap' rel='stylesheet'>
 		<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 		</script>
 		<script type="text/javascript">
@@ -36,7 +37,7 @@ onload = function(){
 
 		<!-- Header -->
 			<header id="header">
-				<a href="index.html" class="title">ERIS 2024 - Tutorials</a>
+				<a href="index.html" class="title">ERIS 2026 - Tutorials</a>
 				<nav>
 					<ul>
 						<li><a href="index.html">Home</a></li>
@@ -61,7 +62,7 @@ onload = function(){
 							<!-- Text -->
 							<section>
 								<p>
-									This guide provides a basic example for calibrating e-MERLIN C-Band (5 GHz) continuum data in CASA. It has been tested in CASA 6.5. It is designed to run using an averaged data set <code class="language-none">all_avg.ms</code> (1.7 G), in which case you will need at least 5.5 G disk space to complete this tutorial. This tutorial is based upon the DARA 3C277.1 tutorial but is using new 2019 observations of the sources and some updates for ERIS 2024. If you find bugs in the code please contact Jack Radcliffe (jack.radcliffe@up.ac.za).
+									This guide provides a basic example for calibrating e-MERLIN C-Band (5 GHz) continuum data in CASA. It has been tested in CASA 6.5. It is designed to run using an averaged data set <code class="language-none">all_avg.ms</code> (1.7 G), in which case you will need at least 5.5 G disk space to complete this tutorial. This tutorial is based upon the DARA 3C277.1 tutorial but is using new 2019 observations of the sources and some updates for ERIS 2026. If you find bugs in the code please contact Jack Radcliffe (jack.radcliffe@up.ac.za).
 								</p>
 								<p>
 									<i>If you have a very slow laptop, you are advised to skip some of the <code class="language-none">plotms</code> steps (see the plots linked to this page instead) and especially, do not use the <code class="language-none">plotms</code> options to write out a png. This is not used in this web page, but if you run the script as provided, you are advised to comment out the calls to <code class="language-none">plotms</code>or at least the part which writes a png, see tutors for guidance.</i>
@@ -153,10 +154,10 @@ onload = function(){
 										<li><code class="language-bash">all_avg.ms</code> - the data (after conversion to a measurement set).</li>
 										<li><code class="language-bash">3C286_C.clean.model.tt0</code> - used for fluxscaling of the data set.</li>
 										<li><code class="language-bash">all_avg_all.flags.txt</code> - all flags</li>
-										<li><code class="language-bash">3C277.1_cal_outline2024.py</code> - the script that we shall input values into to calibrate these data.</li>
-										<li><code class="language-bash">3C277.1_cal_all2024.py.tar.gz</code> - cheat script for calibating these data.</li>
-										<li><code class="language-bash">3C277.1_imaging_outline2024.py</code> - the script that we shall input values into to image and self-calibrate the data. </li>
-										<li><code class="language-bash">3C277.1_imaging_all2024.py.tar.gz</code> - cheat script for imaging and calibrating these data.</li>
+										<li><code class="language-bash">3C277.1_cal_outline2026.py</code> - the script that we shall input values into to calibrate these data.</li>
+										<li><code class="language-bash">3C277.1_cal_all2026.py.tar.gz</code> - cheat script for calibating these data.</li>
+										<li><code class="language-bash">3C277.1_imaging_outline2026.py</code> - the script that we shall input values into to image and self-calibrate the data. </li>
+										<li><code class="language-bash">3C277.1_imaging_all2026.py.tar.gz</code> - cheat script for imaging and calibrating these data.</li>
 										<li><code class="language-bash">1252+5634.ms.tar.gz</code> - measurement set if the calibration goes wrong</li>
 									</ul>
 									Note that some of these are possibly tarred (i.e., end in <code class="language-none">.tar.gz</code> or <code class="language-none">.tar</code>) so you need to use <code class="language-bash">tar -xzvf &lt;filename&gt;</code> to untar these.
@@ -183,7 +184,7 @@ onload = function(){
 	splinetime=3600.0,npointaver=3,phasewrap=180.0,callib='',gaintable=['all_avg.K', 'bpcals_precal.p1'],gainfield=[''],interp=[],spwmap=[] )</code></pre>
 
 								<p>
-									As you can see in the script, the second format (without the <code class="language-python">#</code>) is the form to use in the script, with a comma after every parameter value. When you are happy with the values which you have set for each parameter, enter them in the script <code class="language-bash">3C277.1_cal_outline2024.py</code> (or whatever you have called it). You can leave out parameters for which you have not set values; the defaults will work for these (see e.g., <code class="language-python">help(gaincal)</code> for what these are), but feel free to experiment if time allows.
+									As you can see in the script, the second format (without the <code class="language-python">#</code>) is the form to use in the script, with a comma after every parameter value. When you are happy with the values which you have set for each parameter, enter them in the script <code class="language-bash">3C277.1_cal_outline2026.py</code> (or whatever you have called it). You can leave out parameters for which you have not set values; the defaults will work for these (see e.g., <code class="language-python">help(gaincal)</code> for what these are), but feel free to experiment if time allows.
 								</p>
 								<p>
 									The script already contains most plotting inputs in order to save time. Make and inspect the plots; change the inputs if you want, zoom in etc. There are links to copies of the plots (or parts of plots) but only click on them once you have tried yourself or if you are stuck.
@@ -256,13 +257,13 @@ onload = function(){
 				overwrite=True,
 				listfile='all_avg.listobs.txt')</code></pre>
 								<p>
-									<b>Important:</b> To make it easier, the line numbers corresponding to the script <code class="language-bash">3C277.1_cal_outline2024.py</code> are included in the excerpts from the script shown in this tutorial.
+									<b>Important:</b> To make it easier, the line numbers corresponding to the script <code class="language-bash">3C277.1_cal_outline2026.py</code> are included in the excerpts from the script shown in this tutorial.
 								</p>
 								<p>
 									<ul>
 										<li>When you have entered the parameter, we want to execute the step so that we run the task. In CASA you want to enter the following:
 											<pre><code class="language-python">runsteps=[1];
-execfile('3C277.1_cal_outline2024.py')</code></pre></li>
+execfile('3C277.1_cal_outline2026.py')</code></pre></li>
 										<li>Check the CASA logger to ensure there are no errors (look for the word SEVERE) and check your current directory for a new file called <code class="language-none">all_avg.listobs.txt</code>.</li>
 										<li>Open this file using your favourite text editor (e.g., gedit, emacs, vim) and inspect it.</li>
 									</ul> 
@@ -1245,7 +1246,7 @@ mode='manual' field='0319+4130' antenna='Cm' timerange='2019/08/02/15:18:18~2019
 									<ol>
 										<li><code class="language-python">imagename</code> - this is self explanatory, you need to set an image name which should describe the imaging step and object imaged.</li>
 										<li><code class="language-python">field</code> - this is the name of the field that you want to observe and again is self-explanatory.</li>
-										<li><code class="language-python">cell</code> - this is the angular size of each pixel in our output image. To estimate this, we need to determine the resolution of our interferometer. We can do this by looking at the $uv$ distance (i.e. the radial distance of measurements in the $uv$ plane). This is done in step 1 of your <code class="language-bash">3C277.1_imaging_outline2024.py</code> script. 
+										<li><code class="language-python">cell</code> - this is the angular size of each pixel in our output image. To estimate this, we need to determine the resolution of our interferometer. We can do this by looking at the $uv$ distance (i.e. the radial distance of measurements in the $uv$ plane). This is done in step 1 of your <code class="language-bash">3C277.1_imaging_outline2026.py</code> script. 
 										<ul>
 											<li>Either execute step 1 or use the following commands,<pre class="line-numbers" data-start="60"><code class="language-python">	plotms(vis='1252+5634.ms',
 		   xaxis='uvwave',
@@ -1776,7 +1777,7 @@ mode='manual' field='0319+4130' antenna='Cm' timerange='2019/08/02/15:18:18~2019
 									</table>
 								</div>
 								<p class="alt">
-									In the rightmost panel, you can see the result if we continue the self-calibration process (reaching 15 and 30s solution intervals for phase and amplitude, respectively). The majority of these errors have disappeared, the image fidelity has improved significantly and the S/N has peaked at around 3700. If you would like to continue the self-calibration process, the calibration script can be found <a href="https://eris2024.iaa.csic.es/data/3C277.1_imaging_extrasc2024.py" target="_blank">here</a>. Note that not all errors are gone and specialist algorithms and careful flagging of these data is required to improve the S/N further. For the final tutorial on advanced imaging, we shall use this fully self-calibrated data set.
+									In the rightmost panel, you can see the result if we continue the self-calibration process (reaching 15 and 30s solution intervals for phase and amplitude, respectively). The majority of these errors have disappeared, the image fidelity has improved significantly and the S/N has peaked at around 3700. If you would like to continue the self-calibration process, the calibration script can be found <a href="https://jradcliffe5.github.io/eris2026_website/data/3C277.1_imaging_extrasc2026.py" target="_blank">here</a>. Note that not all errors are gone and specialist algorithms and careful flagging of these data is required to improve the S/N further. For the final tutorial on advanced imaging, we shall use this fully self-calibrated data set.
 								</p> 
 							</section>
 							<hr/>
@@ -1787,7 +1788,7 @@ mode='manual' field='0319+4130' antenna='Cm' timerange='2019/08/02/15:18:18~2019
 									In the final tutorial, we are going to use a fully self-calibrated data set of 3C277.1 and experiment with different deconvolution algorithms and weighting schemes which will act as an introduction to more advanced imaging concepts.
 								</p>
 								<p> 
-									For this tutorial, you should have downloaded and untarred the <code class="language-bash">ERIS24_adv_imaging_tutorial.tar.gz</code> data set which should have included the <code class="language-bash">1252+5634_adv_im.ms</code> measurement set. You will also need the scripts we were using in the imaging and self-calibration tutorial.
+									For this tutorial, you should have downloaded and untarred the <code class="language-bash">ERIS26_adv_imaging_tutorial.tar.gz</code> data set which should have included the <code class="language-bash">1252+5634_adv_im.ms</code> measurement set. You will also need the scripts we were using in the imaging and self-calibration tutorial.
 								</p>
 								<p>
 									This data-set has had the CORRECTED self-calibrated visibilities split into the DATA columns of this measurement set (to reduce the data size) and the most recent self-calibration model has been Fourier transformed into the measurement set (making a MODEL column).

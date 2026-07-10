@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>ERIS2024 - Imaging</title>
+		<title>ERIS2026 - Imaging</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -16,6 +16,7 @@
 		<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML">
 		</script>
 		<link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap' rel='stylesheet'>
 		<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 		</script>
 		<script type="text/javascript">
@@ -30,7 +31,7 @@ onload = function(){
 
 		<!-- Header -->
 			<header id="header">
-				<a href="index.html" class="title">ERIS 2024 - Tutorials</a>
+				<a href="index.html" class="title">ERIS 2026 - Tutorials</a>
 				<nav>
 					<ul>
 						<li><a href="index.html#five">Home</a></li>
@@ -55,11 +56,11 @@ onload = function(){
 							<section>
 								<h2 class="alt"><a name=""></a>Data required</h2>
 									<p>
-										For this section, it is advised to start from the pre-calibrated data (rather than your own from the calibration section). These are contained in the <code class="language-bash">ERIS24_imaging_tutorial.tar.gz</code> which you should have already downloaded. Untar this folder and enter the <code class="language-bash">ERIS24_imaging</code> folder that should have been created. Please ensure the following are in your current working directory,
+										For this section, it is advised to start from the pre-calibrated data (rather than your own from the calibration section). These are contained in the <code class="language-bash">ERIS26_imaging_tutorial.tar.gz</code> which you should have already downloaded. Untar this folder and enter the <code class="language-bash">ERIS26_imaging</code> folder that should have been created. Please ensure the following are in your current working directory,
 										<ol>
 											<li><code class="language-bash">1252+5634.ms</code> - measurement set containing just the 3C277.1 visibilities (this should have been created after the calibration tutorial or untar from the imaging tar bundle (see <a href="index.html#three">Home</a>)</li>
-											<li><code class="language-bash">3C277.1_imaging_outline2024.py</code> - imaging script for the next three tutorials (imaging, self-calibration and advanced imaging)</li>
-											<li><code class="language-bash">3C277.1_imaging_all2024.py</code> - cheat script containing the answers</li>
+											<li><code class="language-bash">3C277.1_imaging_outline2026.py</code> - imaging script for the next three tutorials (imaging, self-calibration and advanced imaging)</li>
+											<li><code class="language-bash">3C277.1_imaging_all2026.py</code> - cheat script containing the answers</li>
 										</ol>
 									</p>
 							</section>
@@ -162,7 +163,7 @@ onload = function(){
 									<ol>
 										<li><code class="language-python">imagename</code> - this is self explanatory, you need to set an image name which should describe the imaging step and object imaged.</li>
 										<li><code class="language-python">field</code> - this is the name of the field that you want to observe and again is self-explanatory.</li>
-										<li><code class="language-python">cell</code> - this is the angular size of each pixel in our output image. To estimate this, we need to determine the resolution of our interferometer. We can do this by looking at the $uv$ distance (i.e. the radial distance of measurements in the $uv$ plane). This is done in step 1 of your <code class="language-bash">3C277.1_imaging_outline2024.py</code> script. 
+										<li><code class="language-python">cell</code> - this is the angular size of each pixel in our output image. To estimate this, we need to determine the resolution of our interferometer. We can do this by looking at the $uv$ distance (i.e. the radial distance of measurements in the $uv$ plane). This is done in step 1 of your <code class="language-bash">3C277.1_imaging_outline2026.py</code> script. 
 										<ul>
 											<li>Either execute step 1 or use the following commands,<pre class="line-numbers" data-start="66"><code class="language-python">	plotms(vis='1252+5634.ms',
 		   xaxis='uvwave',

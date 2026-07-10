@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>ERIS2024 - Polarisation</title>
+		<title>ERIS2026 - Polarisation</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -15,6 +15,7 @@
 		<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML">
 		</script>
 		<link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap' rel='stylesheet'>
 		<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 		</script>
 		<script type="text/javascript">
@@ -29,7 +30,7 @@ onload = function(){
 
 		<!-- Header -->
 			<header id="header">
-				<a href="index.html" class="title">ERIS 2024 - Advanced tutorials</a>
+				<a href="index.html" class="title">ERIS 2026 - Advanced tutorials</a>
 				<nav>
 					<ul>
 						<li><a href="index.html#five">Home</a></li>
@@ -55,17 +56,17 @@ onload = function(){
 										<li>Before beginning, ensure that you have a directory made for this tutorial (e.g., named Polarisation) and that your computer has at least 7GB of space.</li>
 										<li>Next, use the link or command below to download the data to that folder:
 										<ul class="actions">
-											<li><a href="data/ERIS24_AT2_polarisation.tar.gz" target="_blank" class="button primary icon solid fa-download">ERIS24_AT2_polarisation.tar.gz (~1.6GB)</a></li>
+											<li><a href="data/ERIS26_AT2_polarisation.tar.gz" target="_blank" class="button primary icon solid fa-download">ERIS26_AT2_polarisation.tar.gz (~1.6GB)</a></li>
 										</ul>
-										<pre><code class="language-bash">wget https://home.iaa.csic.es/~jmoldon/eris2024/data/ERIS24_AT2_polarisation.tar.gz</code></pre></li>
-										<li>Un-tar the download using <code class="language-bash">tar -xvf ERIS24_AT2_polarisation.tar.gz</code>
+										<pre><code class="language-bash">wget https://home.iaa.csic.es/~jmoldon/eris2024/data/ERIS26_AT2_polarisation.tar.gz</code></pre></li>
+										<li>Un-tar the download using <code class="language-bash">tar -xvf ERIS26_AT2_polarisation.tar.gz</code>
 									</ul>
 								</p>
 								<p>
 									You should find the following files in your folder:
 									<ol>
 										<li><code class="language-bash">all_avg_pol.ms</code> - measurement set that has all previous calibration (including self-calibration) applied from the main tutorials.</li>
-										<li><code class="language-bash">3C277.1_pol2024.py</code> - script for the polarisation tutorial</li>
+										<li><code class="language-bash">3C277.1_pol2026.py</code> - script for the polarisation tutorial</li>
 										<li><code class="language-bash">1331+3030_IQUV_5GHz.clean.model.tt0</code> and <code class="language-bash">1331+3030_IQUV_5GHz.clean.model.tt1</code> - polarised model for 3C286 (with two frequency terms)</li>
 									</ol>
 								</p>
@@ -112,7 +113,7 @@ onload = function(){
 									This step lists the information on the measurement set. <code class="language-none">all_avg_pol.ms.listobs</code> should contain,
 
 <pre><code class="language-none">================================================================================
-	MeasurementSet Name:  /Users/jackradcliffe/Documents/ERIS24/ERIS24_polarisation/all_avg_pol.ms      MS Version 2
+	MeasurementSet Name:  /Users/jackradcliffe/Documents/ERIS26/ERIS26_polarisation/all_avg_pol.ms      MS Version 2
 ================================================================================
 Observer: TS8004     Project: TS8004  
 Observation: e-MERLIN
@@ -151,7 +152,7 @@ Antennas: 6:
 	4    Da    Da        25.0 m   -002.32.08.4  +52.58.17.2       4093.0417    12222.9915     6904.6753  3829087.869000  -169568.939000  5081082.350000
 	5    Cm    Cm        32.0 m   +000.02.13.7  +51.58.49.3     176453.7144   -97751.3908     7233.2945  3920356.264000     2541.973000  5014284.480000</code></pre>
 
-This lists the target and calibrator fields.  If you cannot remember the roles of these sources, consult the list starting line 53 of <code class="language-bash">3C277.1_pol2024.py</code>
+This lists the target and calibrator fields.  If you cannot remember the roles of these sources, consult the list starting line 53 of <code class="language-bash">3C277.1_pol2026.py</code>
 								</p>
 							</section>
 							<hr/>

@@ -156,14 +156,14 @@ input, select, textarea {
 		-webkit-transition: color 0.2s ease, border-bottom-color 0.2s ease;
 		-ms-transition: color 0.2s ease, border-bottom-color 0.2s ease;
 		transition: color 0.2s ease, border-bottom-color 0.2s ease;
-		border-bottom: dotted 2px #312450;
+		border-bottom: dotted 2px #0b2e3c;
 		color: inherit;
 		text-decoration: none;
 	}
 
 		a:hover {
 			border-bottom-color: transparent;
-			color: #312450;
+			color: #0b2e3c;
 		}
 
 	strong, b {
@@ -192,7 +192,8 @@ input, select, textarea {
 		
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #5e42a6;
+		color: #0e7c8a;
+		font-family: "Space Grotesk", Arial, Helvetica, sans-serif;
 		font-weight: bold;
 		line-height: 1.5;
 		margin: 0.5em 0 0em 0;
@@ -223,10 +224,10 @@ input, select, textarea {
 		}
 
 			h1.major:after {
-				background-image: -moz-linear-gradient(to right, #5e42a6, #b74e91);
-				background-image: -webkit-linear-gradient(to right, #5e42a6, #b74e91);
-				background-image: -ms-linear-gradient(to right, #5e42a6, #b74e91);
-				background-image: linear-gradient(to right, #5e42a6, #b74e91);
+				background-image: -moz-linear-gradient(to right, #0e7c8a, #c06b1f);
+				background-image: -webkit-linear-gradient(to right, #0e7c8a, #c06b1f);
+				background-image: -ms-linear-gradient(to right, #0e7c8a, #c06b1f);
+				background-image: linear-gradient(to right, #0e7c8a, #c06b1f);
 				-moz-transition: max-width 0.2s ease;
 				-webkit-transition: max-width 0.2s ease;
 				-ms-transition: max-width 0.2s ease;
@@ -342,7 +343,7 @@ input, select, textarea {
 
 	hr {
 		border: 0;
-		border-bottom: solid 1px #5e42a6;
+		border-bottom: solid 1px #0e7c8a;
 		margin: 2em 0;
 	}
 
@@ -1868,9 +1869,9 @@ input, select, textarea {
 		transition: border-color 0.2s ease;
 		background-color: transparent;
 		border: solid 1px !important;
-		border-color: #5e42a6 !important;
+		border-color: #0e7c8a !important;
 		border-radius: 3em;
-		color: #5e42a6 !important;
+		color: #0e7c8a !important;
 		cursor: pointer;
 		display: inline-block;
 		font-size: 0.6em;
@@ -1901,7 +1902,7 @@ input, select, textarea {
 			-webkit-transition: opacity 0.2s ease, -webkit-transform 0.2s ease;
 			-ms-transition: opacity 0.2s ease, -ms-transform 0.2s ease;
 			transition: opacity 0.2s ease, transform 0.2s ease;
-			background: #5e42a6;
+			background: #0e7c8a;
 			border-radius: 3em;
 			content: '';
 			height: 100%;
@@ -1950,7 +1951,7 @@ input, select, textarea {
 		button.primary,
 		.button.primary {
 			background-color: #ffffff;
-			color: #312450 !important;
+			color: #0b2e3c !important;
 		}
 
 			input[type="submit"].primary:after,
@@ -1980,7 +1981,7 @@ input, select, textarea {
 		input[type="button"]:hover,
 		button:hover,
 		.button:hover {
-			border-color: #312450 !important;
+			border-color: #0b2e3c !important;
 		}
 
 			input[type="submit"]:hover:after,
@@ -2000,7 +2001,7 @@ input, select, textarea {
 			input[type="button"]:hover:active,
 			button:hover:active,
 			.button:hover:active {
-				border-color: #312450 !important;
+				border-color: #0b2e3c !important;
 			}
 
 				input[type="submit"]:hover:active:after,
@@ -2107,7 +2108,7 @@ input, select, textarea {
 		button2.primary,
 		.button2.primary {
 			background-color: #ffffff;
-			color: #312450 !important;
+			color: #0b2e3c !important;
 		}
 
 			input[type="submit"].primary:after,
@@ -2600,7 +2601,7 @@ input, select, textarea {
 
 		select option {
 			color: #ffffff;
-			background: #312450;
+			background: #0b2e3c;
 		}
 
 		select:focus::-ms-value {
@@ -2688,7 +2689,7 @@ input, select, textarea {
 		input[type="radio"]:checked + label:before {
 			background: #ffffff;
 			border-color: #ffffff;
-			color: #b74e91;
+			color: #c06b1f;
 			content: '\f00c';
 		}
 
@@ -2769,7 +2770,7 @@ input, select, textarea {
 			display: block;
 			background: #ffffff;
 			border-radius: 100%;
-			color: #312450;
+			color: #0b2e3c;
 			text-align: center;
 			line-height: 2.5em;
 			margin: 0 0 1.3em 0;
@@ -2780,27 +2781,27 @@ input, select, textarea {
 			}
 
 				.wrapper.style1 .icon.major:before {
-					color: #5e42a6;
+					color: #0e7c8a;
 				}
 
 				.wrapper.style1-alt .icon.major:before {
-					color: #493382;
+					color: #0b6170;
 				}
 
 				.wrapper.style2 .icon.major:before {
-					color: #5052b5;
+					color: #2a6f97;
 				}
 
 				.wrapper.style2-alt .icon.major:before {
-					color: #3e4094;
+					color: #1f5a7d;
 				}
 
 				.wrapper.style3 .icon.major:before {
-					color: #b74e91;
+					color: #c06b1f;
 				}
 
 				.wrapper.style3-alt .icon.major:before {
-					color: #953d75;
+					color: #9c5514;
 				}
 
 /* Image */
@@ -3284,7 +3285,7 @@ input, select, textarea {
 				-webkit-transition: opacity 1s ease;
 				-ms-transition: opacity 1s ease;
 				transition: opacity 1s ease;
-				background: rgba(49, 36, 80, 0.9);
+				background: rgba(11, 46, 60, 0.9);
 				content: '';
 				display: block;
 				height: 100%;
@@ -3406,7 +3407,7 @@ input, select, textarea {
 	}
 
 		table tbody tr {
-			border: solid 1px #5e42a6;
+			border: solid 1px #0e7c8a;
 			border-left: 0;
 			border-right: 0;
 		}
@@ -3420,7 +3421,7 @@ input, select, textarea {
 		}
 
 		table th {
-			color: #5e42a6;
+			color: #0e7c8a;
 			font-size: 1em;
 			font-weight: bold;
 			padding: 0 0.75em 0.75em 0.75em;
@@ -3428,11 +3429,11 @@ input, select, textarea {
 		}
 
 		table thead {
-			border-bottom: solid 2px #5e42a6;
+			border-bottom: solid 2px #0e7c8a;
 		}
 
 		table tfoot {
-			border-top: solid 2px #5e42a6;
+			border-top: solid 2px #0e7c8a;
 		}
 
 		table.alt {
@@ -3440,7 +3441,7 @@ input, select, textarea {
 		}
 
 			table.alt tbody tr td {
-				border: solid 1px #5e42a6;
+				border: solid 1px #0e7c8a;
 				border-left-width: 0;
 				border-top-width: 0;
 			}
@@ -3498,31 +3499,31 @@ input, select, textarea {
 			}
 
 		.wrapper.alt {
-			background-color: #261c3e;
+			background-color: #08222e;
 		}
 
 		.wrapper.style1 {
-			background-color: #5e42a6;
+			background-color: #0e7c8a;
 		}
 
 		.wrapper.style1-alt {
-			background-color: #493382;
+			background-color: #0b6170;
 		}
 
 		.wrapper.style2 {
-			background-color: #5052b5;
+			background-color: #2a6f97;
 		}
 
 		.wrapper.style2-alt {
-			background-color: #3e4094;
+			background-color: #1f5a7d;
 		}
 
 		.wrapper.style3 {
-			background-color: #b74e91;
+			background-color: #c06b1f;
 		}
 
 		.wrapper.style3-alt {
-			background-color: #953d75;
+			background-color: #9c5514;
 		}
 
 		.wrapper.fullscreen {
@@ -3632,7 +3633,7 @@ input, select, textarea {
 		display: -webkit-flex;
 		display: -ms-flex;
 		display: flex;
-		background-color: #5e42a6;
+		background-color: #0e7c8a;
 		cursor: default;
 		padding: 1.75em 2em;
 	}
@@ -3786,7 +3787,7 @@ input, select, textarea {
 
 	#sidebar {
 		padding: 2.5em 2.5em 0.5em 2.5em ;
-		background: #312450;
+		background: #0b2e3c;
 		cursor: default;
 		height: 100vh;
 		left: 0;
@@ -4023,14 +4024,14 @@ input, select, textarea {
 			}
 
 			#sidebar nav a:before {
-				background: #3c2c62;
+				background: #0e3d4e;
 			}
 
 			#sidebar nav a:after {
-				background-image: -moz-linear-gradient(to right, #5e42a6, #b74e91);
-				background-image: -webkit-linear-gradient(to right, #5e42a6, #b74e91);
-				background-image: -ms-linear-gradient(to right, #5e42a6, #b74e91);
-				background-image: linear-gradient(to right, #5e42a6, #b74e91);
+				background-image: -moz-linear-gradient(to right, #0e7c8a, #c06b1f);
+				background-image: -webkit-linear-gradient(to right, #0e7c8a, #c06b1f);
+				background-image: -ms-linear-gradient(to right, #0e7c8a, #c06b1f);
+				background-image: linear-gradient(to right, #0e7c8a, #c06b1f);
 				-moz-transition: max-width 0.2s ease;
 				-webkit-transition: max-width 0.2s ease;
 				-ms-transition: max-width 0.2s ease;
@@ -4119,7 +4120,7 @@ input, select, textarea {
 
 						#sidebar nav a:after {
 							background-image: none;
-							background-color: #b74e91;
+							background-color: #c06b1f;
 						}
 
 		}
@@ -4168,4 +4169,57 @@ input, select, textarea {
 				background-attachment: scroll;
 			}
 
+		}
+/* ERIS 2026: light homepage theme (applied via body.home-light on index.html) */
+
+	body.home-light .wrapper.style1 {
+		background-color: #f7f4ee;
+	}
+
+	body.home-light .wrapper.style2 {
+		background-color: #ffffff;
+	}
+
+	body.home-light .wrapper.style3 {
+		background-color: #e9f3f4;
+	}
+
+	body.home-light .wrapper p.alt2,
+	body.home-light .wrapper ul.alt2 {
+		color: #3d4a52;
+	}
+
+	body.home-light h1.home,
+	body.home-light h2.home,
+	body.home-light h3.home {
+		color: #0e7c8a;
+	}
+
+	body.home-light h1.home {
+		padding-bottom: 0.35em;
+		position: relative;
+	}
+
+		body.home-light h1.home:after {
+			background-image: linear-gradient(to right, #0e7c8a, #c06b1f);
+			border-radius: 0.2em;
+			bottom: 0;
+			content: '';
+			height: 0.08em;
+			left: 0;
+			position: absolute;
+			width: 2.5em;
+		}
+
+	body.home-light b.alt {
+		color: #9c5514;
+	}
+
+	body.home-light .button2 {
+		border-color: #0e7c8a !important;
+		color: #0e7c8a !important;
+	}
+
+		body.home-light .button2:after {
+			background: #0e7c8a;
 		}

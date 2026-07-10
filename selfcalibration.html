@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>ERIS2024 - Self calibration</title>
+		<title>ERIS2026 - Self calibration</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -15,6 +15,7 @@
 		<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML">
 		</script>
 		<link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap' rel='stylesheet'>
 		<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 		</script>
 		<script type="text/javascript">
@@ -29,7 +30,7 @@ onload = function(){
 
 		<!-- Header -->
 			<header id="header">
-				<a href="index.html" class="title">ERIS 2024 - Tutorials</a>
+				<a href="index.html" class="title">ERIS 2026 - Tutorials</a>
 				<nav>
 					<ul>
 						<li><a href="index.html#four">Home</a></li>
@@ -57,8 +58,8 @@ onload = function(){
 										For this section, you want to continue on from your imaging tutorial folder and you should have the following files,
 										<ol>
 											<li><code class="language-bash">1252+5634.ms</code> - measurement set containing just the 3C277.1 visibilities.</li>
-											<li><code class="language-bash">3C277.1_imaging_outline2024.py</code> - imaging script.</li>
-											<li><code class="language-bash">3C277.1_imaging_all2024.py</code> - cheat script containing the answers</li>
+											<li><code class="language-bash">3C277.1_imaging_outline2026.py</code> - imaging script.</li>
+											<li><code class="language-bash">3C277.1_imaging_all2026.py</code> - cheat script containing the answers</li>
 											<li><code class="language-bash">1252+5634_1.clean.*</code> - images, models, residuals made during the imaging tutorial</li>
 										</ol>
 									</p>
@@ -517,7 +518,7 @@ onload = function(){
 									</table>
 								</div>
 								<p class="alt">
-									In the rightmost panel, you can see the result if we continue the self-calibration process (reaching 15 and 30s solution intervals for phase and amplitude, respectively). The majority of these errors have disappeared, the image fidelity has improved significantly and the S/N has peaked at around 3700. If you would like to continue the self-calibration process, the calibration script can be found <a href="https://eris2024.iaa.csic.es/data/3C277.1_imaging_extrasc2024.py" target="_blank">here</a>. Note that not all errors are gone and specialist algorithms and careful flagging of these data is required to improve the S/N further. For the final tutorial on advanced imaging, we shall use this fully self-calibrated data set.
+									In the rightmost panel, you can see the result if we continue the self-calibration process (reaching 15 and 30s solution intervals for phase and amplitude, respectively). The majority of these errors have disappeared, the image fidelity has improved significantly and the S/N has peaked at around 3700. If you would like to continue the self-calibration process, the calibration script can be found <a href="https://jradcliffe5.github.io/eris2026_website/data/3C277.1_imaging_extrasc2026.py" target="_blank">here</a>. Note that not all errors are gone and specialist algorithms and careful flagging of these data is required to improve the S/N further. For the final tutorial on advanced imaging, we shall use this fully self-calibrated data set.
 								</p> 
 							</section>
 							
