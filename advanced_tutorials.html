@@ -1,0 +1,192 @@
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>ERIS2024 - Advanced Tutorials</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/prism.css">
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script type="text/javascript" async src="assets/MathJax/MathJax.js%3Fconfig=TeX-MML-AM_CHTML">
+		</script>
+		<link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet'>
+		<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+		</script>
+		<script type="text/javascript">
+var pcs = document.lastModified.split(" ")[0].split("/");
+var date = pcs[1] + '/' + pcs[0] + '/' + pcs[2];
+onload = function(){
+    document.getElementById("lastModified").innerHTML = "Page last modified: " + date;
+}
+		</script>
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<a href="index.html" class="title">ERIS 2024 - Advanced tutorials</a>
+				<nav>
+					<ul>
+						<li><a href="index.html#four">Home</a></li>
+					</ul>
+				</nav>
+			</header>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<section id="main" class="wrapper">
+						<div class="inner">
+							<h1 class="major">Instructions for the Advanced Tutorials</h1>
+							<!-- Text -->
+							<section>
+								<p>
+									The advanced tutorials require specific software. The materials (data, scripts, etc) may be allocated in different web pages. Follow the instructions of the Advanced Tutorial you are assigned to.
+								</p>
+							</section>
+							<hr/>
+							<section>
+								<h2>Table of contents</h2>
+								<ol start="1">
+									<li><a href="advanced_tutorials.html#at1">AT1 - Metre / wide-field (LOFAR)</a></li>
+									<li><a href="advanced_tutorials.html#at2">AT2 - Centimetre / polarisation (e-MERLIN)</a></li>
+									<li><a href="advanced_tutorials.html#at3">AT3 - Centimetre / VLBI (EVN)</a></li>
+									<li><a href="advanced_tutorials.html#at4">AT4 - Millimetre / spectral line (ALMA)</a></li>
+								</ol>
+							</section>
+							<hr/>
+							<section>
+								<h2 class="alt"><a name="at1"></a>AT1 - Metre / wide-field (LOFAR)</h2>
+								<p class="alt"><a href="advanced_tutorials.html#"><font size="-5">&larr; back to top</font></a></p>
+
+
+
+<ol>
+  <li>
+    <p><strong>Install ds9 for data inspection</strong><br>
+    Download following the instructions here:<br>
+    <a href="https://sites.google.com/cfa.harvard.edu/saoimageds9/download">https://sites.google.com/cfa.harvard.edu/saoimageds9/download</a></p>
+  </li>
+<br>
+  <li>
+    <strong>Install a working container application, Apptainer or Docker:</strong>
+    <ul>
+      <li>Apptainer instructions: <a href="https://apptainer.org/docs/admin/main/installation.html">https://apptainer.org/docs/admin/main/installation.html</a></li>
+      <li>Docker instructions: <a href="https://docs.docker.com/desktop/install/mac-install/">https://docs.docker.com/desktop/install/mac-install/</a></li>
+    </ul>
+    <p><em>Note: If you encounter issues having a working Apptainer environment on your machine (e.g. if you use MacOS with a non-Intel processor), use the docker option above which is the recommended option.</em></p>
+  </li>
+<br>
+  <li>
+    <strong>Obtain the needed containers</strong>
+    <ol>
+        <strong>3.1 Apptainer</strong>
+        <ul>
+          <li>Download the container from the FLoCs repo to run the facetselfcal.py, available in <a href="https://tikk3r.github.io/flocs/">https://tikk3r.github.io/flocs/</a></li>
+         <ul> 
+          <li>Check your processor unit type and use version 5.1.0.</li>
+          <li>Check that the Apptainer & FLoC installed properly, e.g.:
+            <pre><code>$ apptainer shell flocs_v5.1.0_sandybridge_sandybridge_mkl_cuda.sif</code></pre></li>
+         </ul> 
+          </li>
+
+          <li>Pull the LINC container (it will take a few minutes)
+            <pre><code>$ apptainer pull linc:v4.0-89.sif docker://astronrd/linc:v4.0-89-ge1f9b67</code></pre>
+          </li>
+        </ul>
+        <p><em>Note: To run the FLoCs containers, you need to install Apptainer, not Singularity</em></p>
+        <strong>3.2 Docker</strong>
+        <ul>
+          <li>Download the docker file, available in <a href="https://git.astron.nl/loose/eris/-/blob/main/eris2024/Dockerfile?ref_type=heads">https://git.astron.nl/loose/eris/-/blob/main/eris2024/Dockerfile?ref_type=heads</a></li>
+          <li>For Linux / Mac users with Docker installed (and started - MAC users), with an opened terminal window:
+            <pre><code>$ mkdir TMP_ERIS2024
+$ cp /&lt;path to the downloaded&gt;/eris2024at1.def TMP_ERIS2024
+$ cd TMP_ERIS2024
+$ docker build -t eris2024_soft -f eris2024at1.def .</code></pre>
+          </li>
+        </ul>
+    </ol>
+  </li>
+
+  <li>
+    <p><strong>Download data & ancillary files</strong><br>
+    From the data repository: <a href="https://filesender.surf.nl/?s=download&token=3a59b45d-30f9-4392-932c-07a1ce2b3202" target="_blank">https://filesender.surf.nl/?s=download&token=3a59b45d-30f9-4392-932c-07a1ce2b3202</a></p>
+    <p>Untar the content and move it to your favourite path</p>
+    <pre><code>$ tar -xvf ERIS2024_AT1.tar
+$ mv ERIS2024_AT1 /&lt;to your path&gt;</code></pre>
+  </li>
+</ol>
+
+</section>
+
+<hr/>
+<section>
+	<h2 class="alt"><a name="at2"></a>AT2 - Centimetre / polarisation (e-MERLIN)</h2>
+	<p class="alt"><a href="advanced_tutorials.html#"><font size="-5">&larr; back to top</font></a></p>
+	<p>
+    Follow the "Data required" instructions in: <a href="polarisation.html">Polarisation advanced tutorial</a>
+    
+    
+    
+	</p>
+</section>
+
+<hr/>
+<section>
+	<h2 class="alt"><a name="at3"></a>AT3 - Centimetre / VLBI (EVN)</h2>
+	<p class="alt"><a href="advanced_tutorials.html#"><font size="-5">&larr; back to top</font></a></p>
+	<p>
+    All instructions related to AT3 can be found at: <a href="https://www.evlbi.org/eris2024"  target="_blank">ERIS 2024 - VLBI </a>
+
+	</p>
+</section>
+
+<hr/>
+<section>
+	<h2 class="alt"><a name="at4"></a>AT4 - Millimetre / spectral line (ALMA)</h2>
+	<p class="alt"><a href="advanced_tutorials.html#"><font size="-5">&larr; back to top</font></a></p>
+
+    <p>For the Millimetre/spectral line tutorial we will process ALMA data in CASA.</p>
+
+    <h3>Software Requirements:</h3>
+    <ul>
+        <li>Firefox is required to visualize ALMA weblogs. Alternatively, except for participants with Mac ARM, it is possible to visualize weblogs using CASA directly without the need of Firefox. (<a href="https://help.almascience.org/kb/articles/what-is-the-best-way-to-view-the-weblog" target="_blank">more details here</a>)</li>
+        <li>The same CASA version that has been installed for the rest of the school. Unfortunately, participants with Mac ARM will not be able to run the ALMA Science Pipeline with that CASA version on their laptops. Information on how to overcome this limitation will be updated before the tutorial. In the next few days (hopefully before our tutorial day), a new version of the ALMA Pipeline will be released, packed with CASA 6.6.1. That should work on Mac ARM (TBC).</li>
+        <li>The same CARTA version 4.1.0 will be used for the data analysis part of the tutorial.</li>
+    </ul>
+
+    <h3>ALMA Tutorial Data:</h3>
+    <ul>
+        <li>ALMA measurement sets [~1.6GB; 4.7 GB after untar]: <a href="https://bele.oso.chalmers.se/nordicarc/workshops/ERIS2024_mm_tutorial/HD163296_data.tgz" target="_blank">Download ALMA measurement sets</a></li>
+        <li>ALMA Weblogs [~390 MB]: <a href="https://bele.oso.chalmers.se/nordicarc/workshops/ERIS2024_mm_tutorial/HD163296_weblogs.tgz" target="_blank">Download ALMA Weblogs</a></li>
+    </ul>
+
+</section>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; Jack Radcliffe </li><li>Design: <a href="http://html5up.net" target="_blank">HTML5 UP</a> and <a href="https://www.jb.man.ac.uk/~radcliff" target="_blank">Jack Radcliffe</a></li><li><span id="lastModified"></span></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script src="assets/js/prism.js"></script>
+
+	</body>
+</html>

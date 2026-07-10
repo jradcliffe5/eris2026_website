@@ -1,0 +1,538 @@
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>ERIS2024 - Introduction to data</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/prism.css">
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML">
+		</script>
+		<link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet'>
+		<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+		</script>
+		<script type="text/javascript">
+var pcs = document.lastModified.split(" ")[0].split("/");
+var date = pcs[1] + '/' + pcs[0] + '/' + pcs[2];
+onload = function(){
+    document.getElementById("lastModified").innerHTML = "Page last modified: " + date;
+}
+		</script>
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<a href="index.html" class="title">ERIS 2024 - Tutorials</a>
+				<nav>
+					<ul>
+						<li><a href="index.html#five">Home</a></li>
+						<li><a href="intro_data.html" class="active">Intro. to data</a></li>
+						<li><a href="calibration.html">Calibration</a></li>
+						<li><a href="imaging.html" >Imaging</a></li>
+						<li><a href="selfcalibration.html">Self calibration</a></li>
+						<li><a href="adv_imaging.html">Advanced imaging</a></li>
+						<li><a href="3C277_full.html">Full tutorial</a></li>
+					</ul>
+				</nav>
+			</header>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<section id="main" class="wrapper">
+						<div class="inner">
+							<h1 class="major">Introduction to interferometric data</h1>
+
+							<!-- Text -->
+							<section>
+								<p>
+									This guide provides a basic example for calibrating e-MERLIN C-Band (5 GHz) continuum data in CASA. It has been tested in CASA 6.6.5. It is designed to run using an averaged data set <code class="language-none">all_avg.ms</code> (1.7 G), in which case you will need at least 5.5 G disk space to complete this tutorial. This tutorial is based upon the DARA 3C277.1 tutorial, but is using new 2019 observations of the sources together with some updates for ERIS 2024. If you find bugs in the code please contact Jack Radcliffe (jack.radcliffe@manchester.ac.uk).
+								</p>
+								<p>
+									<i>If you have a very slow laptop, you are advised to skip some of the <code class="language-none">plotms</code> steps (see the plots linked to this page instead) and especially, do not use the <code class="language-none">plotms</code> options to write out a png. This is not used in this web page, but if you run the script as provided, you are advised to comment out the calls to <code class="language-none">plotms</code>or at least the part which writes a png, see tutors for guidance.</i>
+								</p>
+							</section>
+							<hr/>
+							<section>
+								<h2>Table of Contents</h2>
+								<p>
+									<b>Important:</b> The numbers in brackets respond to the steps in the accompanying python scripts.
+								</p>
+								<p>
+									<ol>
+										<li><a href="intro_data.html#guidance">Guidance for calibrating 3C277.1 in CASA</a></li>
+										<ol class="alt">
+											<li><a href="intro_data.html#data">The data and supporting material</a></li>
+											<li><a href="intro_data.html#use_guide">How to use this guide</a></li>
+										</ol>
+										<li><a href="intro_data.html#data_inspection">Data inspection and flagging</a></li>
+										<ol class="alt">
+											<li><a href="intro_data.html#Check_data">Check data: listobs and plotants (1-3)</a></li>
+											<li><a href="intro_data.html#late_on_source">Identify 'late on source' bad data (4)</a></li>
+											<li><a href="intro_data.html#flag_start">Flag the bad data at the start of each scan (5)</a></li>
+											<li><a href="intro_data.html#flag_end_chan">Flag the bad end channels (6-7)</a></li>
+											<li><a href="intro_data.html#identify_bad_data">Identify and flag remaining bad data (8-10)</a></li>
+										</ol>
+									</ol>
+								</p>
+							</section>
+							<hr/>
+							<section>
+								<h2 class="alt"><a name="guidance"></a>1. Guidance for calibrating 3C277.1 in CASA</h2>
+								<h4><a name="data"></a>1A. The data and supporting material</h4>
+								<p>
+									You should have alread downloaded the <code class="language-bash">ERIS24_calibration_tutorial.tar.gz</code> file. If you have not done the CASA testing previously, then you will need to unpack this bundle via <code class="language-bash">tar -xvf ERIS24_calibration_tutorial.tar.gz</code>). This should make a folder called <code class="language-bash">ERIS24_calibration</code>. Move into that directory in a command line, and please double check that you have at least the following in your current directory:
+
+									<ul>
+										<li><code class="language-bash">all_avg.ms</code> - the data (after conversion to a measurement set).</li>
+										<li><code class="language-bash">3C286_C.clean.model.tt0</code> - used for fluxscaling of the data set.</li>
+										<li><code class="language-bash">all_avg_all.flags.txt</code> - all flags</li>
+										<li><code class="language-bash">0319+4130_flags.txt</code> - empty flagging file for bandpass calibrator</li>
+										<li><code class="language-bash">0319+4130_flags_answers.txt</code> - complete flagging file for bandpass calibrator</li>
+										<li><code class="language-bash">3C277.1_cal_outline2024.py</code> - the script that we shall input values into to calibrate these data.</li>
+										<li><code class="language-bash">3C277.1_cal_all2024.py</code> - cheat script for calibating these data.</li>
+									</ul>
+									If you have done the CASA testing before this tutorial, you may find that you have additional files with the prefix test_casa. These are fine to keep, but you may want to delete them if you want to tidy up. 
+								</p>
+							</section>
+							<hr/>
+							<section>
+								<h3><a name="use_guide"></a>1B. How to use this guide</h3>
+								<p>
+									This user guide presents inputs for CASA tasks e.g., <code class="language-bash">gaincal</code> to be entered interactively at a terminal prompt for the calibration of the averaged data and initial target imaging. This is useful to examine your options and see how to check for syntax errors. You can run the task directly by typing <code class="language-bash">gaincal</code> at the prompt; if you want to change parameters and run again, if the task has written a calibration table, delete it (make sure you get the right one) before re-running. If you have done the CASA testing tutorial then you can review the <code class="language-bash">plotms</code> command by typing:
+								</p>
+								<pre><code class="language-python"># In CASA
+!more plotms.last</code></pre>
+								<p>
+									This will output something like:
+								</p>
+								<pre><code class="language-none">vis                  = 'all_avg.ms'
+gridrows             = 1
+gridcols             = 1
+rowindex             = 0
+colindex             = 0
+plotindex            = 0
+xaxis                = 'uvdist'
+yaxis                = 'amp'
+yaxislocation        = ''
+selectdata           = True
+averagedata          = True
+transform            = True
+extendflag           = False
+iteraxis             = ''
+customsymbol         = []
+coloraxis            = 'spw'
+customflaggedsymbol  = False
+xconnector           = ''
+plotrange            = []
+title                = ''
+titlefont            = 0
+xlabel               = ''
+xaxisfont            = 0 
+.....</code></pre>
+
+								<p>
+
+									As you can see in the script, the second format (without the <code class="language-python">#</code>) is the form to use in the script, with a comma after every parameter value. When you are happy with the values which you have set for each parameter, enter them in the script <code class="language-bash">3C277.1_cal_outline2024.py</code> (or whatever you have called it). You can leave out parameters for which you have not set values; the defaults will work for these (see e.g., <code class="language-python">help(gaincal)</code> for what these are), but feel free to experiment if time allows.
+								</p>
+								<p>
+									The script already contains most plotting inputs in order to save time. Make and inspect the plots; change the inputs if you want, zoom in etc. There are links to copies of the plots (or parts of plots) but only click on them once you have tried yourself or if you are stuck.
+								</p>
+								<p>
+									The parameters which should be set explicitly or which need explanation are given below, with <code class="language-python">'**'</code> if they need values. Steps that you need to take action on are in bullet points.
+								</p>
+								<p>
+									The data set that we are using today is a 2019 observation of 3C277.1, a bright radio AGN with two-sided jets. Within the data data set, named <code class="language-bash">all_avg.ms</code> it contains four fields that we are going to use to calibrate these data.:
+								</p>
+								<p>	
+									<table>
+										<thead>
+											<tr>
+												<th><i>e</i>-MERLIN name</th>
+												<th>Common name</th>
+												<th>Role</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>1252+5634</td>
+												<td>3C277.1</td>
+												<td>target</td>
+											</tr>
+											<tr>
+												<td>1302+5748</td>
+												<td>J1302+5748</td>
+												<td>phase reference source</td>
+											</tr>
+											<tr>
+												<td>0319+415</td>
+												<td>3C84</td>
+												<td>bandpass, polarisation leakage cal. (usually 10-20 Jy at 5-6 GHz)</td>
+											</tr>
+											<tr>
+												<td>1331+3030</td>
+												<td>3C286</td>
+												<td>flux, polarisation angle cal. (flux density known accurately)</td>
+											</tr>
+										</tbody>
+									</table>
+									These data were taken in full polarization with 0.512 GHz bandwidth centred on 5072 MHz, in 4 adjacent spectral windows (spw's, also known as IFs in AIPS). Each 128-MHz spw contained 512 channels, each 0.25 MHz wide, and 1 s integrations were used (the data are later averaged). We will show in the next section how we obtained this information!
+								</p>
+								<p>
+									These data have already been preprocessing from the original raw fits-idi files from the correlator which included the following steps.
+									<ol>
+										<li>Conversion from fitsidi to a CASA compatible measurement set.</li>
+										<li>Sorted and recalculated the $uvw$ (visibility coordinates), concatenate all data and adjust scan numbers to increment with each source change.</li>
+										<li>Averaged every 8 channels and 4s.</li>
+									</ol>
+								</p>
+							</section>
+							<hr/>
+							<section>
+								<h2 class="alt">2. <a name="data_inspection">Data inspection and flagging</a></h2>
+								<h3 class="alt">2A. <a name="Check_data">Check data: listobs and plotants (steps 1-3)</a></h3>
+								<p class="alt"><a href="intro_data.html#"><font size="-5">&larr; back to top</font></a></p>
+								<p>
+									In this part, we shall see how we can get the information from our data set. One of the golden rules of data reduction is to <b>know your data</b>, as different arrays, configurations and frequencies require different calibration strategies.
+								</p>
+								<p>
+									<ul>
+										<li>Firstly, check that you have <code class="language-bash">all_avg.ms</code> in a directory with enough space and start CASA.</li>
+										<li>Enter the parameter in step 1 of the script to specify the measurement set. The task <code class="language-bash">listobs</code> will summarise the information given above and write it to a file named <code class="language-none">all_avg.listobs.txt</code>.</li>
+									</ul>
+								</p>
+								
+								<pre class="line-numbers" data-start="83"><code class="language-python">	listobs(vis='**',
+			overwrite=True,
+			listfile='all_avg.listobs.txt')</code></pre>
+								<p>
+									<b>Important:</b> To make it easier, the line numbers corresponding to the script <code class="language-bash">3C277.1_cal_outline2024.py</code> are included in the excerpts from the script shown in this tutorial.
+								</p>
+								<p>
+									<ul>
+										<li>When you have entered the parameter, we want to execute the step so that we run the task. In CASA you want to enter the following:
+											<pre><code class="language-python">runsteps=[1];
+execfile('3C277.1_cal_outline2024.py')</code></pre></li>
+										<li>Check the CASA logger to ensure there are no errors (look for the word SEVERE) and check your current directory for a new file called <code class="language-none">all_avg.listobs.txt</code>.</li>
+										<li>Open this file using your favourite text editor (e.g., gedit, emacs, vim) and inspect it.</li>
+									</ul> 
+								<p>
+									Selected entries from this <code class="language-bash">listobs</code> file, ordered by time, show the various scans during the observation,
+								</p>
+								<pre><code class="language-none">  Date        Timerange (UTC)          Scan  FldId FieldName             nRows     SpwIds   Average Interval(s)    ScanIntent
+	  01-Aug-2019/23:20:10.5 - 00:00:00.2     1      3 0319+4130                35820  [0,1,2,3]  [4, 4, 4, 4] 
+	  02-Aug-2019/00:00:04.0 - 00:00:07.0     2      2 1302+5748                   60  [0,1,2,3]  [3, 3, 3, 3] 
+	              00:04:54.5 - 00:06:01.0     3      1 1252+5634                  848  [0,1,2,3]  [4.14, 4.14, 4.14, 4.14] 
+	              00:06:04.0 - 00:07:59.5     4      2 1302+5748                 1484  [0,1,2,3]  [3.96, 3.96, 3.96, 3.96]  
+	  ...
+	              09:30:03.0 - 10:00:00.2   183      3 0319+4130                12428  [0,1,2,3]  [4, 4, 4, 4] 
+	              10:00:03.0 - 10:30:00.2   184      0 1331+3030                16980  [0,1,2,3]  [4, 4, 4, 4] 
+	              10:30:03.0 - 10:32:00.3   185      2 1302+5748                  364  [0,1,2,3]  [4, 4, 4, 4] 
+	              10:32:03.0 - 10:36:01.0   186      1 1252+5634                 3220  [0,1,2,3]  [4.02, 4.02, 4.02, 4.02] 
+	              10:36:03.0 - 10:38:00.3   187      2 1302+5748                 1436  [0,1,2,3]  [4, 4, 4, 4] 
+	  ...</code></pre>
+								<p>
+									There are 4 fields:
+								</p>
+								<pre><code class="language-none">Fields: 4
+	  ID   Code Name                RA               Decl           Epoch        nRows
+	  0    ACAL 1331+3030           13:31:08.287300 +30.30.32.95900 J2000        46256
+	  1         1252+5634           12:52:26.285900 +56.34.19.48800 J2000       560340
+	  2         1302+5748           13:02:52.465277 +57.48.37.60932 J2000       242296
+	  3    CAL  0319+4130           03:19:48.160110 +41.30.42.10330 J2000        91856</code></pre>
+								<p>
+									Four spectral windows (each with 64 channels) with all four polarisation products:
+								</p>
+								<pre><code class="language-none">Spectral Windows:  (4 unique spectral windows and 1 unique polarization setups)
+	  SpwID  Name   #Chans   Frame   Ch0(MHz)  ChanWid(kHz)  TotBW(kHz) CtrFreq(MHz)  Corrs          
+	  0      none      64    GEO    4817.000      2000.000    128000.0   4880.0000   RR  RL  LR  LL
+	  1      none      64    GEO    4945.000      2000.000    128000.0   5008.0000   RR  RL  LR  LL
+	  2      none      64    GEO    5073.000      2000.000    128000.0   5136.0000   RR  RL  LR  LL
+	  3      none      64    GEO    5201.000      2000.000    128000.0   5264.0000   RR  RL  LR  LL</code></pre>
+								<p>
+									And 6 antennas participating:
+								</p>
+								<pre><code class="language-none">Antennas: 6:
+	  ID   Name  Station   Diam.    Long.         Lat.                Offset from array center (m)                ITRF Geocentric coordinates (m)        
+	                                                                     East         North     Elevation               x               y               z
+	  0    Mk2   Mk2       24.0 m   -002.18.14.1  +53.02.57.3      19618.7284    20856.7583     6908.7107  3822846.760000  -153802.280000  5086285.900000
+	  1    Kn    Kn        25.0 m   -002.59.49.7  +52.36.17.2     -26823.2185   -28465.4973     7055.9694  3860084.921000  -202105.036000  5056568.917000
+	  2    De    De        25.0 m   -002.08.40.0  +51.54.49.9      30300.7876  -105129.6730     7263.6278  3923442.718000  -146914.386000  5009755.292000
+	  3    Pi    Pi        25.0 m   -002.26.43.3  +53.06.14.9      10141.4322    26944.5297     6845.6479  3817549.874000  -163031.121000  5089896.642000
+	  4    Da    Da        25.0 m   -002.32.08.4  +52.58.17.2       4093.0417    12222.9915     6904.6753  3829087.869000  -169568.939000  5081082.350000
+	  5    Cm    Cm        32.0 m   +000.02.13.7  +51.58.49.3     176453.7144   -97751.3908     7233.2945  3920356.264000     2541.973000  5014284.480000</code></pre>
+								<p>
+									In the next step, we are going to plot the positions of the antennae present in our observation. This is a handy way of getting a feel on the expected resolution and will assist when we try to determine a reference antenna.
+								</p>
+								<p>
+									<ul>
+										<li>Take a look at step 2 and enter one parameter to plot the antenna positions (optionally, a second to write this to a png).<pre class="line-numbers" data-start="93"><code class="language-python">	plotants(vis='**', figfile='**')</code></pre></li>
+										<li>Execute step 2 by setting <code class='language-python'>runsteps</code> and using <code class='language-python'>execfile</code> like in step 1.</li>
+									</ul>
+								</p>
+								<p>
+									You should end up with a plot that looks similar to that below.
+								</p>
+								<div class="col-12"><span class="image fit"><img src="plots/antpos.png" alt="" /></span></div>
+								<p>
+									Consider what would make a good reference antenna. Although Cambridge has the largest diameter, it has no short baselines. We will use Mk2 for the reference antenna. Ideally we want all of the baselines to the reference antenna to look through similar atmospheric conditions so we typically choose the one with the shortest baselines, or we pick the most sensitive antenna.
+								</p>
+								<p>
+									Next we want to plot the $uv$ coverage of the data for the phase-reference source so that we can see what Fourier scales our interferometer is sampling and whether we need to adopt our calibration strategy to adapt for snapshot imaging.
+								</p>
+								<p>
+									<ul>
+										<li>Check out step 3 in the script. You need to enter several parameters but some have been done for you. Check out the annotated <code class="language-bash">listobs</code> output above to try to identify these but remember to also use the <code class="language-python">help</code> function,
+								<pre class="line-numbers" data-start="100"><code class="language-python">	plotms(vis='**',
+		   xaxis='**',
+		   yaxis='**',
+		   coloraxis='spw',
+		   avgchannel='8',
+		   field='1302+5748', 
+		   plotfile='', 
+		   showgui=gui, overwrite=True)</code></pre></li>
+		       					<li>Execute step 3 and check the new <code class="language-bash">plotms</code> graphical user interface (GUI) that should have appeared on your screen.</li>
+		       				</ul>
+		       			</p>
+								<p>
+									Note that we averaged in channels a bit so that this doesn't destroy your computer. If this takes a long time, move on and look at the plot below. The $u$ and $v$ coordinates represent (wavelength/projected baseline) as the Earth rotates whilst the source is observed. Thus, as each spw is at a different wavelength, it samples a different part of the $uv$ plane, improving the aperture coverage of the source, allowing Multi-Frequency Synthesis (MFS) of continuum sources.
+								</p>
+
+								<div class="col-12"><span class="image fit"><img src="plots/1302+5748_uv.png" alt="" /></span></div>
+								<p>
+									With our initial data inspection under way, we are now going to move onto finding and removing bad data that can adversely affect our calibration later down the line.
+								</p>
+							</section>
+							<hr/>
+							<section>
+								<h3 class="alt"><a name="late_on_source"></a>2B. Identify 'late on source' bad data (step 4)</h3>
+								<p class="alt"><a href="intro_data.html#"><font size="-5">&larr; back to top</font></a></p>
+								<p>
+									The first check for bad data that we are going to look for is whether the antennae are on-source for the whole duration of the scan. This is important to check, especially for heterogeneous arrays, where the different slewing rates means that different antennae come onto source at different times. Often this is flagged automatically by the observatory but it is not always the case. The flagging of these data is called 'quacking' (don't ask me why!). Let's first plot the data to see if we need to quack the data!
+								</p>
+								<p>
+									<ul>
+										<li>Check out step 4 and use <code class="language-bash">plotms</code> to plot the phase-reference source amplitudes as a function of time. To save time we want to select just a few central channels and average them. This needs to be enough to give good S/N but not so many that phase errors across the band cause decorrelation. Some hints on the proper parameter selection are given in the code block below.</li>
+									</ul>
+								</p>
+								<pre class="line-numbers" data-start="119"><code class="language-python">	plotms(vis='**',
+		   field='**', #phase reference source
+		   spw='**', #plot just inner 1/2 channels for each spw (check listobs for the # channels)
+		   avgchannel='**', #average these channels together
+		   xaxis='**',yaxis='**', #plot amp versus time
+		   antenna=antref+'&Pi',   #uses Mk2 as a reference antenna for comparison but other w/ short baselines are ok
+		   correlation='**,**',  #just select the parallel polarisations as polarised intensity is fainter
+		   coloraxis='corr', #colour by correlation
+		   showgui=gui,        
+		   overwrite=True, plotfile='')</code></pre>
+								<p>
+									<ul>
+										<li>Once you have inputted the parameters, execute step 4 and the plotms GUI should have opened</li>
+										<li>Zoom in onto just a few scans and you should see a plot similar to that shown below.</li>
+									</ul>
+								</p>
+								<div class="col-12"><span class="image fit"><img src="plots/pre-quack.png" alt="" /></span></div>
+								<p>
+									In this case, the pre-applied observatory flags which removed data when the antennae was off source was not perfect, resulting in the single integration at the start which needs to be flagged. This is roughly the same amount of time at the start of each scan is bad for all sources and antennas, so the phase reference is a good source to examine. (In a few cases there is extra bad data, ignore that for now). 
+									<ul>
+										<li>Estimate this time interval using the plot and we shall then enter that value in next part.</li>
+									</ul>
+								</p>
+							</section>
+							<hr/>
+							<section>
+								<h3 class="alt"><a name="flag_start"></a>2C. Flag the bad data at the start of each scan (step 5)</h3>
+								<p class="alt"><a href="intro_data.html#"><font size="-5">&larr; back to top</font></a></p>
+								<p>
+									One of the most important rules for good data reduction is good bookkeeping i.e., knowing exactly what has been done to these data, and how to return back to how the data looked in a previous step. Often you may find that you have entered an incorrect parameter and this has messed up your data, such as accidentally flagging all your data. CASA has some inbuilt methods to help with this bookkeeping. One of these is the task <code class='language-python'>flagmanager</code> which can be used to remember all the flags at a certain point in the calibration steps. This means that you can use this task to revert back to how the flags were before you changed them.
+								</p>
+								<p>
+									<ul>
+										<li>Take a look at step 5, we are going to input parameters for both tasks before executing the step this time.</li>
+										<li>The <code class="language-python">flagmanager</code> task will be used to <b>save</b> the current state of the flags before we remove that bad data we identified at the start of the scans. Enter the parameters that will save the flags. 
+										<pre class="line-numbers" data-start="136"><code class="language-python">	flagmanager(vis='**',
+				mode='**',
+				versionname='pre_quack')</code></pre></li>
+									</ul>
+								</p>
+								<p>
+									If the parameters are set correctly, then we will generate a backup named <code class="language-bash">pre_quack</code> in a <code class="language-bash">all_avg.ms.flagversions</code> file. After we execute step 5, you can check that it exists by running <code class="language-bash">flagmanager</code> again using <code class="language-python">mode='list'</code> instead.
+								</p>
+								<p>
+									Next, we need to actually do the quacking or flagging of these channels. We use the CASA task <code class="language-bash">flagdata</code> to do this along with the special mode called <code class="language-bash">quack</code>. 
+								</p>
+								<p>
+									<ul>
+										<li>Fill in the <code class="language-bash">flagdata</code> parameters, inserting the time that the antennas were off source that we found earlier.								
+										<pre class="line-numbers" data-start="141"><code class="language-python">	flagdata(vis='**',
+			 mode='**',
+			 quackinterval='**') #needs to be a integer</code></pre></li>
+			 							<li>Execute step 5. The script will also re-run the <code class="language-python">plotms</code> command from step 4 to show that the data is removed (if your GUI is still open we could tick the reload option and replot it.)</li>
+									</ul>
+								</p>
+
+								<p>
+									This step should produce a plot similar to that below (when you zoom in) which shows the bad data removed.
+								</p>
+								<div class="col-12"><span class="image fit"><img src="plots/quacked.png" alt="" /></span></div>
+							</section>
+							<hr/>
+							<section>
+
+								<h3 class="alt"><a name="#flag_end_chan"></a>2D. Flag the bad end channels (steps 6-7)</h3>
+								<p class="alt"><a href="intro_data.html#"><font size="-5">&larr; back to top</font></a></p>
+								<p>
+									Due to limitations in the signal path, and the effect of dividing a continuous signal into spw and then taking Fourier transforms for correlation, the edges of each spw in the frequency domain are of lower sensitivity and are normally flagged. We often correct for this effect (called bandpass calibration), but the low S/N data on these edge channels can result in errant solutions and noise being injected into these data. This effect is instrumental and so is the same for all sources, polarizations and antennas. However, different spectral windows may be different. We need to look at a very bright source which has enough signal in each channel in order to see this effect. In this case we can use the source 0319+415.
+								</p>
+								<p>
+									To obtain the correct parameters for the flagging part, we want to identify the channels where the amplitudes versus frequencies are low so we want to plot these data. 
+								</p>
+								<p>
+									<ul>
+										<li>Look at step 6. For the <code class="language-bash">plotms</code> command below. Add in the correct parameters to plot the frequency (or channel) for 0319+415.
+										<pre class="line-numbers" data-start="164"><code class="language-python">	plotms(vis='**',
+		   field='**',
+		   xaxis='**',yaxis='**', #plot amplitude against channel
+		   antenna=antref+'&Kn',  #select one baseline
+		   correlation='**,**',   #just parallel hands (i.e. LL or RR)
+		   avgtime='**',     #set to a very large number
+		   avgscan='**',	   #average all scans
+		   iteraxis='**', coloraxis='**', #view each spectral window in turn, and colour by correlation
+		   showgui=gui,                         
+		   overwrite=True, plotfile='')</code></pre></li>
+		   						</ul>
+		   					</p>
+								<p>
+									The use of <code class="language-bash">iteraxis</code> allows us to scroll between the spectral windows (using the green arrow buttons in the GUI). Below is the plot for the first spectral window.
+								</p>
+								<div class="col-12"><span class="image fit"><img src="plots/identify_end_chans_Spw0.png" alt="" /></span></div>
+								<p>
+									From looking at this plot we are going to flag the channels dropping off to zero at the edge. These are going to be approximately the first 5 channels (0-4) and the last three channels (61-63).
+								</p>
+								<p>
+									<ul>
+										<li>Do the same for the other three spectral windows and note down which channels to flag (remember that we are using zero indexing so the first channel is 0).</li>
+									</ul>
+								</p> 
+								<p>
+									With the channels for all spectral windows identified, we want to now actually flag them. However, remember that we should always back-up our flags should things go wrong. 
+								</p>
+								<p>
+									<ul>
+										<li>Look at step 7. Back up the flags and enter the appropriate parameters in <code class="language-bash">flagdata</code>. Note the odd CASA notation for selecting spectral windows and channels. We have provided the "bad"/insensitive channels in spw 0 with the correct syntax, so use that as a guide for the other spectral windows. You can add multiple spectral windows in the same string using a comma e.g., <code class="language-bash">spw='0:0~3,1:0~4'</code>, will flag channels 0 to 3 in spectral window 0 and 0 to 4 in spectral window 1.
+										<pre class="line-numbers" data-start="182"><code class="language-python">	flagmanager(vis='all_avg.ms',
+				mode='save',
+				versionname='pre_endchans')
+
+	# End chans
+	flagdata(vis='all_avg.ms', 
+			 mode='manual',
+			 spw='0:0~4;61~63,***',  #enter the ranges to be flagged for the other spw
+			 flagbackup=False)</code></pre></li>
+			 						</ul>
+								</p>
+								<p>
+									<ul>
+										<li>Execute step 7 and then re-plot in <code class="language-bash">plotms</code> (the code should already do this replotting for you!). You should get a plot similar to that below</li>
+									</ul>
+								</p>
+								<div class="col-12"><span class="image fit"><img src="plots/0319+4130_flagged_avg_amp-chan.png" alt="" /></span></div>
+							</section>
+							<hr/>
+							<section>
+								<h3 class="alt"><a name="identify_bad_data"></a>2E. Identify and flag remaining bad data (steps 8-10)</h3>
+								<p class="alt"><a href="intro_data.html#"><font size="-5">&larr; back to top</font></a></p>
+								<p>
+									The final step in the flagging process is to closely inspect your data and look for other bad data. This can take many forms such as correlator issues (which causes low amplitudes on some baselines), antenna problems such as warm loads and Radio Frequency Interference (RFI) causing huge spikes in the data (plus many many more).
+								</p>
+								<p>
+									You usually have to go through all baselines, averaging channels and plotting amplitude against time and frequency. This can be very tedious so there has been considerable efforts to produce automatic flaggers (e.g., AOFlagger, rflag) which can do this automatically. However, you still want to judge whether these algorithms are working properly and not flagging decent data. Therefore having some experience doing it manually can give you experience on what exactly we consider as 'good' and 'bad' data.
+								</p>
+								<p>
+								 To save time (and your sanity!), we are not going to do it all here. We are just going to look at one source, 0319+4130, and write down a few commands. This is done in the form of a list file, which has no commas and the only spaces must be a single space between each parameter for a given flagging command line. Some errors affect all the baselines to a given antenna; others (e.g., correlator problems) may only affect one baseline. Usually all spw will be affected so you can just inspect one but check afterwards that all are 'clean'. It can be hard to see what is good or bad for a faint target but if the phase-reference source is bad for longer than a single scan then usually the target will be bad for that intervening time. 
+								</p>
+								<p>
+									Before we begin to flag, remember we should start by backing up the flags again!
+								</p>
+								<p>
+									<ul>
+										<li>Take a look at step 8 and enter the correct parameters for <code class="language-python">flagmanager</code><pre class="line-numbers" data-start='216'><code class="language-python">	flagmanager(vis='**',
+				mode='**',
+				versionname='pre_timeflagging')</code></pre></li>
+										<li>Take a look at the <code class="language-python">plotms</code> commands in the file. These will plot all the sources and save them to a file. The final command will put the amplitude versus time for 0319+4130, the source we want to flag now.</li>
+										<li>Use the <code class="language-bash">plotms</code> window to inspect 0319+4130, paging (iterating) through the baselines.</li>
+										<li>Zoom in and identify the time ranges and antennae where we have bad data. A plot showing some bad data on 0319+4130 after zooming in is shown below.</li>
+									</ul>
+								</p>
+								<div class="col-12"><span class="image fit"><img src="plots/example_flagging.png" alt="" /></span></div>
+								<p>
+									Save these into the text file <code class="language-bash">0319+4130_flags.txt</code>. We have provided the answers in the file <code class="language-bash">0319+4130_flags_answers.txt</code> and some example commands are given below.
+								</p>
+								<pre><code class="language-none">mode='manual' field='0319+4130' timerange='2019/08/02/09:30:40~2019/08/02/09:50:36'
+mode='manual' field='0319+4130' timerange='2019/08/02/15:00:00~2019/08/02/15:05:40'
+mode='manual' field='0319+4130' antenna='Cm' timerange='2019/08/02/15:18:18~2019/08/02/15:18:30'</code></pre>
+								<p>
+									By paging through all the baselines, you can figure out which bad data affect which antennas (i.e., the same bad data is on all baselines to that antenna. These commands are applied in <code class="language-bash">flagdata</code> using <code class="language-bash">mode='list'</code>, <code class="language-bash">inpfile='**'</code> where <code class="language-bash">inpfile</code> is the name of your flagging file. 
+								</p>
+								<p>
+									<ul>
+										<li>Take a look at step 9, and enter the correct inputs into <code class="language-bash">flagdata</code> for you to apply the text file you have created. This step will re-plot the source to ensure that the data is now flagged<pre class="line-numbers" data-start='262'><code class="language-python">	flagdata(vis='all_avg.ms',
+			 mode='**',
+			 inpfile='**')</code></pre></li>
+										<li>Execute step 9 and inspect the plotting window. You should get a plot similar to that shown below.</li>
+									</ul>
+								</p>
+								<div class="col-12"><span class="image fit"><img src="plots/0319+4130_flagged_avg_amp-time.png" alt="" /></span></div>
+								<p>
+									<ul>
+										<li><b>If you have time,</b> expand your investigations to the other sources and enter flagging commands into your flagging file. You can then re-run step 9 to apply the new flags.</li>
+										<li>If you are running out of time, use <code class="language-bash">all_avg_all.flags.txt</code> as the <code class="language-bash">inpfile</code> command to remove all the bad data. Please do check the file and explore these data so you understand where the commands came from.</li>
+										<li>Execute step 10 to apply these flags to ensure that your data is ready for the next tutorial: Calibration</li>
+									</ul>
+								</p>
+								<p>
+									This step should also make some plots named <code class="language-bash">&lt;source_name&gt;_flagged_avg_amp-time.png</code>. Inspect these to check that all the bad data has been removed. A plot of amplitude versus time for the phase calibrator (1302+5748) is given below.
+								</p>
+								<div class="col-12"><span class="image fit"><img src="plots/post_flagging_1302+5748.png" alt="" /></span></div>
+								<p>
+									Congratulations, you have finished the first part of this tutorial. Next we shall move onto calibrating these data. Follow the link below to continue.
+								</p>
+								<p>
+									<ul class="actions stacked">
+										<li><a href="calibration.html" class="button fit">Part 2 - calibration</a></li>
+									</ul>
+								</p>
+							</section>
+						</div>
+					</section>
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; Jack Radcliffe </li><li>Design: <a href="http://html5up.net" target="_blank">HTML5 UP</a> and <a href="https://www.jb.man.ac.uk/~radcliff" target="_blank">Jack Radcliffe</a></li><li><span id="lastModified"></span></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script src="assets/js/prism.js"></script>
+
+	</body>
+</html>

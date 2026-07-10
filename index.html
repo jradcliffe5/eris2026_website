@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>ERIS 2024 Tutorials</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/prism.css">
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script type="text/javascript" async src="assets/MathJax/MathJax.js%3Fconfig=TeX-MML-AM_CHTML">
+		</script>
+		<link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet'>
+		<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+		</script>
+		<script type="text/javascript">
+var pcs = document.lastModified.split(" ")[0].split("/");
+var date = pcs[1] + '/' + pcs[0] + '/' + pcs[2];
+onload = function(){
+    document.getElementById("lastModified").innerHTML = "Page last modified: " + date;
+}
+		</script>
+	</head>
+	<body class="is-preload">
+
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<nav>
+						<ul>
+							<li><a href="index.html#intro">Welcome</a></li>
+							<li><a href="index.html#one">Installing CASA & CARTA</a></li>
+							<li><a href="index.html#two">Downloading the tutorial data</a></li>
+							<li><a href="index.html#three">Testing your CASA installation</a></li>
+							<li><a href="index.html#four">Installation instructions for the Advanced Tutorials</a></li>
+							<li><a href="index.html#five">Starting the tutorial</a></li>
+						</ul>
+					</nav>
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro -->
+				<section id="intro" class="wrapper style1 fullscreen fade-up">
+					<div class="inner">
+						<h1 class="home">ERIS2024 Tutorials</h1>
+						<p class="alt2">
+							Welcome to the European Radio Interferometry School (ERIS) 2024 where we hope that you learn how to go from telescope to science-ready images when using an interferometer. This website hosts the tutorials that you will do to get hands-on practice with data. This homepage will guide you in installing CASA, testing your installation and downloading the tutorial data.
+						</p>
+						<p class="alt2">
+							If you have completed this already, head down to the <a href="index.html#five">bottom of the page</a> where you can find the links to start the tutorial.
+
+							Or go back to the main <a href="https://www.granadacongresos.com/eris2024">ERIS2024 school</a> webpage.
+						</p>
+					</div>
+				</section>
+
+				<section id="one" class="wrapper style2 fade-up">
+					<div class="inner">
+						<h2 class="home">Installing CASA</h2>
+						<p class="alt2">Note: due to issues with the Linux and Mac OS, we will be using different versions of CASA (v6.5.4 on Linux and 6.6.5 on Mac OS). They are functionally the same, but please follow the instructions below carefully.</p>
+						<h3 class="home">Linux</h3>
+							<p class="alt2">
+								<ul class="alt2">
+									<li>Please use the following link to download the CASA version  for your Linux distribution <ul class="actions">
+										<li><a href="https://casa.nrao.edu/download/distro/casa-pipeline/release/linux/casa-6.5.4-9-pipeline-2023.1.0.125-py3.8.tar.xz" target="_blank" class="button primary icon solid fa-download">CASA - Linux</a></li>
+									</ul>
+									<li>Once downloaded, extract the package into an appropriate folder. E.g., you can use the tar command in the command line / terminal to do this:
+									<pre><code class="language-bash">tar xvf casa-6.5.4-9-pipeline-2023.1.0.125-py3.8.tar.xz</code></pre></li>
+									<li>This will make a folder named <code class="language-bash">casa-6.5.4-9-pipeline-2023.1.0.125</code> in the directory you extracted in.</li>
+									<li>You can run CASA by running <code class="language-bash">casa-6.5.4-9-pipeline-2023.1.0.125/bin/casa</code> in your command line.</li>
+									<li>An easier way is to set a bash alias so that you can run CASA by just typing <code class="language-bash">casa</code> into the command line (from anywhere!). This can be done using the following code (where you want to replace <code class="language-bash">(path_to_CASA_folder)</code> with the CASA folder path (you can find your current path with the command <code class="language-bash">pwd</code>). Note that this command will modify your <code class="language-bash">.bashrc</code> file in your home directory by adding a line at the end of the file:
+										<pre><code class="language-bash">echo 'alias casa=(path_to_CASA_folder)/casa-6.5.4-9-pipeline-2023.1.0.125/bin/casa' >> ~/.bashrc </code></pre>
+									For example, if I untarred CASA in my home folder, this command would be
+									<pre><code class="language-bash">echo 'alias casa=/home/radcliff/casa-6.5.4-9-pipeline-2023.1.0.125/bin/casa' >> ~/.bashrc </code></pre></li>
+									<li>Test that this alias works by opening a new terminal and type <code class="language-bash">casa</code> into it. This should open up CASA and the logger window.</li>
+								</ul>
+							</p>
+						<h3 class="home">Mac OS</h3>
+							<p class="alt2">
+								<ul class="alt2">
+									<li>Please use the following link to download the correct CASA version for your Mac OS version. Note that the ARM corresponds to the Apple Silicon systems (i.e. designated as the M1, M2 and M3 processors). If you have an Intel system install the ARM Mac OS 12 / Intel CASA.
+										<ul class="actions">
+										<li><a href="https://casa.nrao.edu/download/distro/casa/release/osx12/casa-6.6.5.31-12.0-py310.dmg" target="_blank" class="button primary icon solid fa-download">CASA - ARM Mac OS 12 / Intel (any OS)</a></li>
+										<li><a href="https://casa.nrao.edu/download/distro/casa/release/osx13/casa-6.6.5.31-13.0-py310.dmg" target="_blank" class="button primary icon solid fa-download">CASA - ARM only Mac OS 13</a></li>
+										<li><a href="https://casa.nrao.edu/download/distro/casa/release/osx14/casa-6.6.5.31-14.0-py310.dmg" target="_blank" class="button primary icon solid fa-download">CASA - ARM only Mac OS 14</a></li>
+									</ul>
+									<li>Open the Terminal and type in the following command. This will create a directory named <code class="language-bash">data</code> inside the hidden casa configuration directory in your home folder <pre><code class="language-bash">mkdir ~/.casa; mkdir ~/.casa/data</code></pre></li>
+									<li>You should have already downloaded a disk image file (<code class="language-bash">.dmg</code>) file that should be similarly named as <code class="language-bash">casa-6.6.5.31-XX.0-py310.dmg</code> where the XX corresponds to your Mac OS version.</li>
+									<li>Open the Finder and double click on the file to get it to mount. This opens another Finder window where there will be CASA and a README.md file.</li>
+									<li>Open another Finder window and open the Applications folder. Copy CASA (or drag and drop) into the Applications folder</li>
+									<li>Within the applications folder, right click and open CASA so that we can override the Apple security safeguard. If this doesn't allow you to open first time, try again. This should finish with a Terminal window opening and the CASA prompt present.</li>
+									<li>Within the CASA prompt type: <code class="language-bash">!create-symlinks</code> and follow the prompts.</li>
+									<li>Leave the CASA window open, and go to System Settings &rarr; Privacy & Security &rarr; Full Disk Access and make CASA, and the Terminal apps have full disk access.</li>
+									<li>Once complete, close CASA and the Terminal app <b class="alt">completely</b> (i.e. right-click on the Mac dock to quit). Open a new Terminal tab/window and type in <code class="language-bash">casa</code>. This should open up CASA and the logger window.</li>
+									<li>The CASA viewer has been discontinued on Mac OS, therefore we need to install the new casagui so that you can do interactive cleaning. Enter the following command in the CASA prompt to install it:
+										<pre><code class="language-bash">!pip3 install casagui==0.3.70</code></code></pre>
+									</li>
+									
+								</ul>
+							</p>
+							<p class="alt2">
+								If these steps have run with no errors, please follow the instructions below to test your CASA installation.
+							</p>
+							<h2 class="home">Installing CARTA</h2>
+							<p class="alt2">We also need to install the CARTA tool which will be used to visualise images. Follow the instructions on the following webpage to install it <a href="https://cartavis.org/#download">https://cartavis.org/#download</a>. You will want to install the stand-alone application.</p>
+					</div>
+				</section>
+
+				<section id="two" class="wrapper style3 fade-up">
+					<div class="inner">
+						<h2 class="home">Downloading the data</h2>
+						<p class="alt2">Before continuing, you should download all the following tar bundles using the links below. Ensure that your drive has at least 10GB of space free. If you have already tested your CASA installation, you may already have the ERIS24_calibration_tutorial.tar.gz file.</p>
+						<p></p>
+                        <ul class="actions"><li><a href="data/ERIS24_calibration_tutorial.tar.gz" target="_blank" class="button primary icon solid fa-download">ERIS24_calibration_tutorial.tar.gz (~1.7GB)</a></li></ul>
+                        <ul class="actions"><li><a href="data/ERIS24_imaging_tutorial.tar.gz" target="_blank" class="button primary icon solid fa-download">ERIS24_imaging_tutorial.tar.gz (~250MB)</a></li></ul>
+                        <ul class="actions"><li><a href="data/ERIS24_adv_imaging_tutorial.tar.gz" target="_blank" class="button primary icon solid fa-download">ERIS24_adv_imaging_tutorial.tar.gz (~250MB)</a></li></ul>
+						<p class="alt2">
+							Alternatively, you can use enter the following in the command line to download these data,<pre><code class="language-bash">wget https://eris2024.iaa.csic.es/data/ERIS24_calibration_tutorial.tar.gz
+wget https://eris2024.iaa.csic.es/data/ERIS24_imaging_tutorial.tar.gz
+wget https://eris2024.iaa.csic.es/data/ERIS24_adv_imaging_tutorial.tar.gz</code></pre>
+						</p>
+					</div>
+					
+				</section>
+
+				<section id="three" class="wrapper style1 fade-up">
+					<div class="inner">
+						<h2 class="home">Testing your CASA installation</h2>
+						<p class="alt2">
+							With CASA installed, you want to follow the next set of instructions on the following webpage to check that your installation is working correctly
+						</p>
+						<p></p>
+						<ul class="actions stacked">
+							<li><a href="casatest.html" class="button2 fit">Testing CASA</a></li>
+						</ul>
+					</div>
+				</section>
+
+				<section id="four" class="wrapper style2 fade-up">
+					<div class="inner">
+						<h2 class="home">Installation instructions for the Advanced Tutorials</h2>
+                        <p class="alt2">
+                                 Follow this page to download the data needed for the Advanced Tutorials and install the required software:
+                             </p>
+                             <p></p>
+                             <ul class="actions stacked">
+                                 <li><a href="advanced_tutorials.html" class="button2 fit">Advanced Tutorials</a></li>
+                             </ul>
+     					</div>
+     				</section>
+
+				<section id="five" class="wrapper style2 fade-up">
+					<div class="inner">
+						<h2 class="home">Starting the tutorials</h2>
+						<p class="alt2">Below you can find the various links to the tutorials we are going to do during ERIS2024. Please ensure you have completed the tests of your CASA installation before starting here. Your tutors will instruct you on which tutorial you should be completing. Note that not all tutorials are hosted here but you will get instructions on how to proceed from your tutors.</p>
+						<p></p>
+						<ul class="actions stacked">
+							<li><a href="intro_data.html" class="button2 fit">Introduction to interferometric data</a></li>
+							<li><a href="calibration.html" class="button2 fit">Calibration</a></li>
+							<li><a href="imaging.html" class="button2 fit">Imaging</a></li>
+							<li><a href="selfcalibration.html" class="button2 fit">Self-calibration</a></li>
+							<li><a href="adv_imaging.html" class="button2 fit">Advanced imaging</a></li>
+						</ul>
+						<p class="alt2">
+							If you wish to do the tutorial in its entireity, follow the link below:
+						</p><p></p>
+						<ul class="actions stacked">
+							<li><a href="3C277_full.html" class="button2 fit">Full tutorial</a></li>
+						</ul>
+						<p class="alt2">
+							The advanced tutorial on polarisation is also hosted here. Please follow the link below to download the data and complete the tutorial.
+						</p><p></p>
+						<ul class="actions stacked">
+							<li><a href="polarisation.html" class="button2 fit">Polarisation advanced tutorial</a></li>
+						</ul>
+					</div>
+				</section>
+
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper style1-alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; Jack Radcliffe </li><li>Design: <a href="http://html5up.net" target="_blank">HTML5 UP</a> and <a href="https://www.jb.man.ac.uk/~radcliff" target="_blank">Jack Radcliffe</a></li><li><span id="lastModified"></span></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script src="assets/js/prism.js"></script>
+
+	</body>
+</html>
