@@ -209,7 +209,7 @@ onload = function(){
 			   interactive=True)</code></pre></div>
 		   								<div class="column">
 										<b>Mac OS</b>
-										<pre class="line-numbers" data-start="245"><code class="language-python">		run_iclean(vis=target+'.ms',
+										<pre class="line-numbers" data-start="245"><code class="language-python">		iclean(vis=target+'.ms',
 				   imagename='targetp1',
 				   imsize=['**','**'],
 				   cell='**arcsec',
@@ -232,7 +232,7 @@ onload = function(){
 				  					</ul>
 				  				</p>
 								<p>
-									With these corrections applied we will CLEAN using <b>(L)</b> <code class="language-bash">tclean</code> / <b>(M)</b> <code class="language-bash">run_iclean</code>, as before, but you will be able to do more iterations as the noise should be lower.
+									With these corrections applied we will CLEAN using <b>(L)</b> <code class="language-bash">tclean</code> / <b>(M)</b> <code class="language-bash">iclean</code>, as before, but you will be able to do more iterations as the noise should be lower.
 								</p>
 								<p>
 									Once this is complete we will get the peak and rms values. I managed to get $S_p \sim 168 \,\mathrm{mJy\,beam^{-1}}$ and $\sigma \sim 0.282\,\mathrm{mJy\,beam^{-1}}$. This is a massive $\mathrm{S/N}$ increase to $\sim 595$ from $225$ before phase self-calibration.
@@ -310,7 +310,7 @@ onload = function(){
 		   interactive=True)</code></pre></div>
 			<div class="column">
 			<b>Mac OS</b>
-			<pre class="line-numbers" data-start="350"><code class="language-python">	run_iclean(vis=target+'.ms',
+			<pre class="line-numbers" data-start="350"><code class="language-python">	iclean(vis=target+'.ms',
 			   imagename='targetp2',
 			   imsize=['**','**'],
 			   cell='**arcsec',
@@ -436,7 +436,7 @@ onload = function(){
 			</div>
 			<div class='column'>
 			<b>Mac OS</b>
-			<pre class="line-numbers" data-start="473"><code class="language-python">	run_iclean(vis=target+'.ms',
+			<pre class="line-numbers" data-start="473"><code class="language-python">	iclean(vis=target+'.ms',
 			   imagename='targetap3',
 			   imsize=['**','**'],
 			   cell='**arcsec',

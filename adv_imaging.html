@@ -131,7 +131,7 @@ onload = function(){
 			   interactive=True)</code></pre></div>
 			   						<div class="column">
 									<b>Mac OS</b>
-									<pre class="line-numbers" data-start="571"><code class="language-python">	run_iclean(vis=target+'_adv_im.ms',
+									<pre class="line-numbers" data-start="571"><code class="language-python">	iclean(vis=target+'_adv_im.ms',
 			   imagename='advIMmulti',
 			   imsize=['**','**'],
 			   cell='**arcsec',
@@ -191,11 +191,11 @@ onload = function(){
 			   scales=[0],
 			   nterms=2,
 			   interactive=True)</code></pre></div>
-							<div class="column"><b>Mac OS</b><pre class="line-numbers" data-start="630"><code class="language-python">	run_iclean(vis=target+'_adv_im.ms',
+							<div class="column"><b>Mac OS</b><pre class="line-numbers" data-start="630"><code class="language-python">	iclean(vis=target+'_adv_im.ms',
 			   imagename='advIMtaper',
 			   imsize=['**','**'],
 			   cell='**arcsec',
-			   uvrange='<**Mlambda', #uvtaper not supported 
+			   uvtaper=['**Mlambda'],
 			   specmode='mfs',
 			   niter=4000, 
 			   cycleniter=300,
@@ -245,7 +245,7 @@ onload = function(){
 									</div>
 									<div class="column">
 										<b>Mac OS</b>
-										<pre class="line-numbers" data-start="589"><code class="language-python">		run_iclean(vis=target+'_adv_im.ms',
+										<pre class="line-numbers" data-start="589"><code class="language-python">		iclean(vis=target+'_adv_im.ms',
 				   imagename='advIMrobust',
 				   imsize=['**','**'],
 				   cell='**arcsec',
