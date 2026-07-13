@@ -49,35 +49,35 @@ onload = function(){
 							<!-- Text -->
 							<section>
 								<p>
-									This page will help you to test your CASA installation. <b>Please follow the instructions before arriving at ERIS26 so that we don't need to sort out installation issues</b>. 
+									This page will help you test your CASA installation. <b>Please follow the instructions before arriving at ERIS26 so that we don't need to resolve installation issues</b>. 
 								</p>
 							</section>
 							<hr/>
 							<section>
 								<h2 class="alt">Test all CASA functionality</h2>
 								<p>
-									In the first part, we shall ensure that all the parts of CASA are working properly.
+									In the first part, we shall ensure that all the components of CASA are working properly.
 									<ul>
-										<li>To begin, make a directory called something like ERIS2026 somewhere with at least ~10GB of disk space. Do not run CASA or work inside your CASA installation.</li>
-										<li>If you haven't already, download the calibration tutorial to this folder using the following link<ul class="actions">
-											<li><a href="data/ERIS26_calibration_tutorial.tar.gz" target="_blank" class="button primary icon solid fa-download">ERIS26_calibration_tutorial.tar.gz (~1.7GB)</a></li></ul>
-										or enter the following in the command line / Terminal to download these data,<pre><code class="language-bash">wget https://jradcliffe5.github.io/eris2026_website/data/ERIS26_calibration_tutorial.tar.gz</code></pre></li>
-										<li>On the command line ensure that you are in the same folder as the <code class="language-bash">ERIS26_calibration_tutorial.tar.gz</code> file and extract the contents by doing,
+										<li>To begin, create a directory called something like ERIS2026 in a location with at least ~10GB of disk space. Do not run CASA or work within your CASA installation.</li>
+										<li>If you haven't already, download the calibration tutorial to this folder using the following link:<ul class="actions">
+											<li><a href="https://www.jb.man.ac.uk/ERIS26/data/ERIS26_calibration_tutorial.tar.gz" target="_blank" class="button primary icon solid fa-download">ERIS26_calibration_tutorial.tar.gz (~1.7GB)</a></li></ul>
+										or enter the following in the command line / Terminal to download these data,<pre><code class="language-bash">wget https://www.jb.man.ac.uk/ERIS26/data/ERIS26_calibration_tutorial.tar.gz</code></pre></li>
+										<li>On the command line, ensure you are in the same folder as the <code class="language-bash">ERIS26_calibration_tutorial.tar.gz</code> file, then extract the contents by doing,
 											<pre><code class="language-bash">tar -zxvf ERIS26_calibration_tutorial.tar.gz</code></pre> </li>
-										<li>This should make a folder called <code class="language-bash">ERIS26_calibration</code> which you should change directory (<code class="language-bash">cd ERIS26_calibration</code>)  into.</li>
-										<li>Start CASA. Depending on your installation this may have different routes.</li>
-										<li>You should see a logger appear, as in the Figure below, bottom right. Whenever you are running a CASA task always check the logger messages. These are saved as <code class="language-none">casa&lt;timestamp&gt;.log</code>, e.g., <code class="language-none">casa-20220906-142900.log</code>.</li>
-										<li>You can use simple shell commands inside CASA, e.g., type <code class="language-bash">ls</code> or more demanding commands prefixed by <code class="language-bash">!</code>, e.g.,<pre><code class="language-bash">!more all_avg_all.flags.txt </code></pre> (see the Terminal on the top-left in the Figure below)</li>
-										<li>Test that the displays are working by entering, <pre><code class="language-python">plotms(vis='all_avg.ms',field='1331+3030',coloraxis='corr', spw='0:40',xaxis='uvdist',yaxis='amp')</code></pre>
-										N.B., If entering all the parameters for a task at once like this, or in a script, separate them with commas. </li>
-										<li>This should produce the display in the top-right of the figure below.</li>
+										<li>This should create a folder called <code class="language-bash">ERIS26_calibration</code>. You should change directory into it (<code class="language-bash">cd ERIS26_calibration</code>).</li>
+										<li>Start CASA. Depending on your installation, this may have different routes.</li>
+										<li>You should see a logger appear, as in the Figure below, bottom right. Whenever you are running a CASA task, always check the logger messages. These are saved as <code class="language-none">casa-&lt;timestamp&gt;.log</code>, e.g., <code class="language-none">casa-20260713-091726.log</code>.</li>
+										<li>You can use simple shell commands in CASA, e.g., type <code class="language-bash">ls</code>, or more complex commands prefixed with <code class="language-bash">!</code>, e.g.,<pre><code class="language-bash">!more all_avg_all.flags.txt</code></pre> (see the Terminal in the top-left of the Figure below)</li>
+										<li>Test that the displays are working by entering, <pre><code class="language-python">plotms(vis='all_avg.ms', field='1331+3030', coloraxis='corr', spw='0:40', xaxis='uvdist', yaxis='amp')</code></pre>
+										Note: If entering all the parameters for a task at once, either like this or in a script, separate them with commas.</li>
+										<li>This should produce the display shown in the top-right of the figure below.</li>
 										</ul>
 										<p><b>For Linux users only:</b></p>
 										<ul>
-										<li>Try opening the viewer GUI using the following command,
-											<pre><code class="language-python">imview('3C286_C.clean.model.tt0',zoom=16)</code></pre>
+										<li>Try opening the viewer GUI with the following command,
+											<pre><code class="language-python">imview('3C286_C.clean.model.tt0', zoom=16)</code></pre>
 										</li>
-										<li>This should produce the display in  Fig. 1 lower left. The exact colours and panel layout may be different but if you don't have the casalogger and the plotms and viewer windows at all or they are unreadable, consult the CASA debugging pages or your sysadmin.</li>
+										<li>This should produce the display shown in the lower-left corner of the Figure below. The exact colours and panel layout may differ, but if you don't have the casalogger and the plotms and viewer windows at all, or if they are unreadable, consult the CASA debugging pages or your sysadmin.</li>
 									</ul>
 								</p>
 								<div class="col-12"><span class="image fit"><img src="plots/CASAtest_1.png" alt="" /></span></div>
@@ -85,18 +85,18 @@ onload = function(){
 									<b>For Mac users only:</b>
 										<ul>
 											<li>
-												In a new terminal tab/window, run the following command to open CARTA (if you have set the alias correctly) <code class="language-bash">carta</code> otherwise open the CARTA Application. Open <code class="language-bash">3C286_C.clean.model.tt0</code> (which is located in the ERIS26_calibration folder) and you should see a window appear that is similar to that shown in the left-hand panel of the Figure below.
+												In a new terminal tab/window, run the following command to open CARTA (if you have set the alias correctly) <code class="language-bash">carta</code>; otherwise, open the CARTA Application. Open <code class="language-bash">3C286_C.clean.model.tt0</code> (which is located in the ERIS26_calibration folder). You should see a window appear that is similar to the one shown in the left-hand panel of the Figure below.
 											</li>
 										</ul>
 										<div class="col-12"><span class="image fit"><img src="plots/CASAtest_1_1.png" alt="" /></span></div>
 										<ul>
 											<li>
-												Next we wish to test the casagui, which is used to do interactive cleaning. Return to your CASA prompt/terminal and copy the following commands.
-												<pre><code class="language-python">from casagui.apps import run_iclean
-run_iclean(vis='all_avg.ms',imagename='test_casa',spw='0',specmode='mfs', niter=1, cell='0.012arcsec',imsize=[256,256],field='0319+4130')	</code></pre></li>
-											<li>If it works properly, you should have a web browser session that looks similar to the figure below.</li>
-											<li>Left click on the box select and drag a box across the image and press <code class="language-python">a</code> to make it a region (as shown in the green box below)</li>
-											<li>Press the circular arrow to check that cleaning is working properly. The status should state 'Reached global stopping threshold (within mask)'</li>
+												Next, we wish to test the casagui, which is used for interactive cleaning. Return to your CASA prompt/terminal and copy the following commands.
+												<pre><code class="language-python">
+iclean(vis='all_avg.ms', imagename='test_casa', spw='0', specmode='mfs', niter=1, cell='0.012arcsec', imsize=[256,256], field='0319+4130')	</code></pre></li>
+											<li>If it works properly, you should have a web browser open with a tab that looks like the figure below.</li>
+											<li>Left-click the box-select tool, drag a box across the image, and press <code class="language-python">a</code> to make it a region (as shown in the green box below).</li>
+											<li>Press the circular arrow to verify that cleaning is working properly. The status should read 'Reached global stopping threshold (within mask).'</li>
 											<li>Click the stop sign to stop the deconvolution.</li>
 										</ul>
 										<div class="col-12"><span class="image fit"><img src="plots/CASAtest_1_2.png" alt="" /></span></div>
@@ -106,19 +106,19 @@ run_iclean(vis='all_avg.ms',imagename='test_casa',spw='0',specmode='mfs', niter=
 							<section>
 								<h2 class="alt">Checking CASA parameters</h2>
 								<p>
-									For this section, we shall inspect the CASA prompt and explain how to enter parameters into CASA tasks. This is of vital importance for the upcoming tutorials. Please follow the below instructions
+									In this section, we shall inspect the CASA prompt and explain how to enter parameters into CASA tasks. This is vital for the upcoming tutorials. Please follow the instructions below.
 								</p>
 								<p>
 									<ul>
-										<li>In the CASA terminal enter <code class="language-bash">tget plotms</code>. This restores the last time you ran the task</li>
-										<li>Enter the command <code class="language-python">inp</code> which shows the inputs of that task. Nb. you may need to scroll up to see all the parameters. You should see that all parameters are defaults or valid values in blue (as in the left side of the figure below)</li>
-										<li>Enter as separate lines,
+										<li>In the CASA terminal, enter <code class="language-bash">tget plotms</code>. This restores the last time you ran the task.</li>
+										<li>Enter the command <code class="language-python">inp</code> to display the inputs for that task. Note that you may need to scroll up to see all the parameters. You should see that all parameters are set to defaults or valid values in blue (as shown on the left side of the figure below).</li>
+										<li>Enter as separate lines the following,
 											<pre><code class="language-python">gridrows='1'
 xaxis='uvdistance'
 inp plotms  </code></pre></li></ul>
 								</p>
 								<p>
-									These values are in red (as in the left of the below figure) to show errors:
+									These values are shown in red (on the left of the figure below) to indicate errors:
 									<ul class="alt3">
 										<li><code class="language-python">gridrows</code> should be a integer like <code class="language-python">1</code>, not a string like <code class="language-python">'1'</code></li>
 										<li><code class="language-python">xaxis</code> is a string, but the allowed values do not include <code class="language-python">'uvdistance'</code>, only the abbreviation <code class="language-python">'uvdist'</code></li>
@@ -126,8 +126,8 @@ inp plotms  </code></pre></li></ul>
 								</p>
 								<p>
 									<ul>
-										<li>If you re-enter the correct values and enter <code class="language-python">inp</code> again, they should be blue again. Nb. if entering each parameter manually/separately, in the CASA terminal like this, don't put a comma at the end of the lines. </li>
-										<li>Once the inputs are correct, you can run the task manually by typing its name, e.g. plotms.  In the tutorial you will see alternative ways to run the tasks such as from a script.</li>
+										<li>If you re-enter the correct values and enter <code class="language-python">inp</code> again, they should turn blue again. NB. If entering each parameter manually or separately in the CASA terminal, don't add a comma at the end of the lines. </li>
+										<li>Once the inputs are correct, you can run the task manually by typing its name, e.g. plotms. In the tutorial, you will see alternative ways to run the tasks, such as from a script.</li>
 									</ul>
 								</p>
 								<p>
@@ -136,7 +136,7 @@ inp plotms  </code></pre></li></ul>
 								</p>
 								<div class="col-12"><span class="image fit"><img src="plots/CASAtest_2.png" alt="" /></span></div>
 								<p>
-									With this complete, you are ready to start the tutorials! Use the link below to return back to the homepage
+									With this complete, you are ready to start the tutorials. Use the link below to return back to the homepage.
 								</p>
 								<p>
 									<ul class="actions stacked">

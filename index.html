@@ -65,45 +65,39 @@ onload = function(){
 				<section id="one" class="wrapper style2 fade-up">
 					<div class="inner">
 						<h2 class="home">Installing CASA</h2>
-						<p class="alt2">Note: due to issues with the Linux and Mac OS, we will be using different versions of CASA (v6.5.4 on Linux and 6.6.5 on Mac OS). They are functionally the same, but please follow the instructions below carefully.</p>
 						<h3 class="home">Linux</h3>
 							<p class="alt2">
 								<ul class="alt2">
-									<li>Please use the following link to download the CASA version  for your Linux distribution <ul class="actions">
-										<li><a href="https://casa.nrao.edu/download/distro/casa-pipeline/release/linux/casa-6.5.4-9-pipeline-2023.1.0.125-py3.8.tar.xz" target="_blank" class="button primary icon solid fa-download">CASA - Linux</a></li>
+									<li>Please use the following link to download the CASA version for your Linux distribution <ul class="actions">
+										<li><a href="https://casa.nrao.edu/download/distro/casa/release/rhel/casa-6.7.5-18-py3.12.el8.tar.xz" target="_blank" class="button primary icon solid fa-download">CASA - Linux</a></li>
 									</ul>
 									<li>Once downloaded, extract the package into an appropriate folder. E.g., you can use the tar command in the command line / terminal to do this:
-									<pre><code class="language-bash">tar xvf casa-6.5.4-9-pipeline-2023.1.0.125-py3.8.tar.xz</code></pre></li>
-									<li>This will make a folder named <code class="language-bash">casa-6.5.4-9-pipeline-2023.1.0.125</code> in the directory you extracted in.</li>
-									<li>You can run CASA by running <code class="language-bash">casa-6.5.4-9-pipeline-2023.1.0.125/bin/casa</code> in your command line.</li>
+									<pre><code class="language-bash">tar xvf casa-6.7.5-18-py3.12.el8.tar.xz</code></pre></li>
+									<li>This will make a folder named <code class="language-bash">casa-6.7.5-18-py3.12.el8</code> in the directory you extracted in.</li>
+									<li>You can run CASA by running <code class="language-bash">casa-6.7.5-18-py3.12.el8/bin/casa</code> in your command line.</li>
 									<li>An easier way is to set a bash alias so that you can run CASA by just typing <code class="language-bash">casa</code> into the command line (from anywhere!). This can be done using the following code (where you want to replace <code class="language-bash">(path_to_CASA_folder)</code> with the CASA folder path (you can find your current path with the command <code class="language-bash">pwd</code>). Note that this command will modify your <code class="language-bash">.bashrc</code> file in your home directory by adding a line at the end of the file:
-										<pre><code class="language-bash">echo 'alias casa=(path_to_CASA_folder)/casa-6.5.4-9-pipeline-2023.1.0.125/bin/casa' >> ~/.bashrc </code></pre>
+										<pre><code class="language-bash">echo 'alias casa=(path_to_CASA_folder)/casa-6.7.5-18-py3.12.el8/bin/casa' >> ~/.bashrc </code></pre>
 									For example, if I untarred CASA in my home folder, this command would be
-									<pre><code class="language-bash">echo 'alias casa=/home/radcliff/casa-6.5.4-9-pipeline-2023.1.0.125/bin/casa' >> ~/.bashrc </code></pre></li>
+									<pre><code class="language-bash">echo 'alias casa=/home/radcliff/ccasa-6.7.5-18-py3.12.el8/bin/casa' >> ~/.bashrc </code></pre></li>
 									<li>Test that this alias works by opening a new terminal and type <code class="language-bash">casa</code> into it. This should open up CASA and the logger window.</li>
 								</ul>
 							</p>
 						<h3 class="home">Mac OS</h3>
 							<p class="alt2">
 								<ul class="alt2">
-									<li>Please use the following link to download the correct CASA version for your Mac OS version. Note that the ARM corresponds to the Apple Silicon systems (i.e. designated as the M1, M2 and M3 processors). If you have an Intel system install the ARM Mac OS 12 / Intel CASA.
+									<li>Please use the following link to download the correct CASA version for your Mac OS version.
 										<ul class="actions">
-										<li><a href="https://casa.nrao.edu/download/distro/casa/release/osx12/casa-6.6.5.31-12.0-py310.dmg" target="_blank" class="button primary icon solid fa-download">CASA - ARM Mac OS 12 / Intel (any OS)</a></li>
-										<li><a href="https://casa.nrao.edu/download/distro/casa/release/osx13/casa-6.6.5.31-13.0-py310.dmg" target="_blank" class="button primary icon solid fa-download">CASA - ARM only Mac OS 13</a></li>
-										<li><a href="https://casa.nrao.edu/download/distro/casa/release/osx14/casa-6.6.5.31-14.0-py310.dmg" target="_blank" class="button primary icon solid fa-download">CASA - ARM only Mac OS 14</a></li>
+										<li><a href="https://casa.nrao.edu/download/distro/casa/release/macos15/casa-6.7.5.18-15.0-arm64-py312.dmg" target="_blank" class="button primary icon solid fa-download">CASA - Mac OS 15</a></li>
+										<li><a href="https://casa.nrao.edu/download/distro/casa/release/macos26/casa-6.7.5.18-26.0-arm64-py312.dmg" target="_blank" class="button primary icon solid fa-download">CASA - Mac OS 26</a></li>
 									</ul>
 									<li>Open the Terminal and type in the following command. This will create a directory named <code class="language-bash">data</code> inside the hidden casa configuration directory in your home folder <pre><code class="language-bash">mkdir ~/.casa; mkdir ~/.casa/data</code></pre></li>
-									<li>You should have already downloaded a disk image file (<code class="language-bash">.dmg</code>) file that should be similarly named as <code class="language-bash">casa-6.6.5.31-XX.0-py310.dmg</code> where the XX corresponds to your Mac OS version.</li>
+									<li>You should have already downloaded a disk image file (<code class="language-bash">.dmg</code>) file that should be similarly named as <code class="language-bash">casa-6.7.5.31-XX.0-py312.dmg</code> where the XX corresponds to your Mac OS version.</li>
 									<li>Open the Finder and double click on the file to get it to mount. This opens another Finder window where there will be CASA and a README.md file.</li>
 									<li>Open another Finder window and open the Applications folder. Copy CASA (or drag and drop) into the Applications folder</li>
 									<li>Within the applications folder, right click and open CASA so that we can override the Apple security safeguard. If this doesn't allow you to open first time, try again. This should finish with a Terminal window opening and the CASA prompt present.</li>
 									<li>Within the CASA prompt type: <code class="language-bash">!create-symlinks</code> and follow the prompts.</li>
 									<li>Leave the CASA window open, and go to System Settings &rarr; Privacy & Security &rarr; Full Disk Access and make CASA, and the Terminal apps have full disk access.</li>
 									<li>Once complete, close CASA and the Terminal app <b class="alt">completely</b> (i.e. right-click on the Mac dock to quit). Open a new Terminal tab/window and type in <code class="language-bash">casa</code>. This should open up CASA and the logger window.</li>
-									<li>The CASA viewer has been discontinued on Mac OS, therefore we need to install the new casagui so that you can do interactive cleaning. Enter the following command in the CASA prompt to install it:
-										<pre><code class="language-bash">!pip3 install casagui==0.3.70</code></code></pre>
-									</li>
-									
 								</ul>
 							</p>
 							<p class="alt2">
@@ -119,13 +113,13 @@ onload = function(){
 						<h2 class="home">Downloading the data</h2>
 						<p class="alt2">Before continuing, you should download all the following tar bundles using the links below. Ensure that your drive has at least 10GB of space free. If you have already tested your CASA installation, you may already have the ERIS26_calibration_tutorial.tar.gz file.</p>
 						<p></p>
-                        <ul class="actions"><li><a href="data/ERIS26_calibration_tutorial.tar.gz" target="_blank" class="button primary icon solid fa-download">ERIS26_calibration_tutorial.tar.gz (~1.7GB)</a></li></ul>
-                        <ul class="actions"><li><a href="data/ERIS26_imaging_tutorial.tar.gz" target="_blank" class="button primary icon solid fa-download">ERIS26_imaging_tutorial.tar.gz (~250MB)</a></li></ul>
-                        <ul class="actions"><li><a href="data/ERIS26_adv_imaging_tutorial.tar.gz" target="_blank" class="button primary icon solid fa-download">ERIS26_adv_imaging_tutorial.tar.gz (~250MB)</a></li></ul>
+                        <ul class="actions"><li><a href="https://www.jb.man.ac.uk/ERIS26/data/ERIS26_calibration_tutorial.tar.gz" target="_blank" class="button primary icon solid fa-download">ERIS26_calibration_tutorial.tar.gz (~1.7GB)</a></li></ul>
+                        <ul class="actions"><li><a href="https://www.jb.man.ac.uk/ERIS26/data/ERIS26_imaging_tutorial.tar.gz" target="_blank" class="button primary icon solid fa-download">ERIS26_imaging_tutorial.tar.gz (~250MB)</a></li></ul>
+                        <ul class="actions"><li><a href="https://www.jb.man.ac.uk/ERIS26/data/ERIS26_adv_imaging_tutorial.tar.gz" target="_blank" class="button primary icon solid fa-download">ERIS26_adv_imaging_tutorial.tar.gz (~250MB)</a></li></ul>
 						<p class="alt2">
-							Alternatively, you can use enter the following in the command line to download these data,<pre><code class="language-bash">wget https://jradcliffe5.github.io/eris2026_website/data/ERIS26_calibration_tutorial.tar.gz
-wget https://jradcliffe5.github.io/eris2026_website/data/ERIS26_imaging_tutorial.tar.gz
-wget https://jradcliffe5.github.io/eris2026_website/data/ERIS26_adv_imaging_tutorial.tar.gz</code></pre>
+							Alternatively, you can use enter the following in the command line to download these data,<pre><code class="language-bash">wget https://www.jb.man.ac.uk/ERIS26/data/ERIS26_calibration_tutorial.tar.gz
+wget https://www.jb.man.ac.uk/ERIS26/data/ERIS26_imaging_tutorial.tar.gz
+wget https://www.jb.man.ac.uk/ERIS26/data/ERIS26_adv_imaging_tutorial.tar.gz</code></pre>
 						</p>
 					</div>
 					

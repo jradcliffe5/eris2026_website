@@ -55,17 +55,17 @@ onload = function(){
 							<!-- Text -->
 							<section>
 								<p>
-									This guide provides a basic example for calibrating e-MERLIN C-Band (5 GHz) continuum data in CASA. It has been tested in CASA 6.6.5. It is designed to run using an averaged data set <code class="language-none">all_avg.ms</code> (1.7 G), in which case you will need at least 5.5 G disk space to complete this tutorial. This tutorial is based upon the DARA 3C277.1 tutorial, but is using new 2019 observations of the sources together with some updates for ERIS 2026. If you find bugs in the code please contact Jack Radcliffe (jack.radcliffe@manchester.ac.uk).
+									This guide provides a basic example of calibrating e-MERLIN C-Band (5 GHz) continuum data in CASA. It has been tested in CASA 6.7.5. It is designed to run on the averaged data set <code class="language-none">all_avg.ms</code> (1.7 G), in which case you will need at least 5.5 G of disk space to complete this tutorial. This tutorial is based on the DARA 3C277.1 tutorial but uses new 2019 observations of the sources, together with some updates for ERIS 2026. If you find bugs in the code, please contact Jack Radcliffe (jack.radcliffe [at] manchester.ac.uk).
 								</p>
 								<p>
-									<i>If you have a very slow laptop, you are advised to skip some of the <code class="language-none">plotms</code> steps (see the plots linked to this page instead) and especially, do not use the <code class="language-none">plotms</code> options to write out a png. This is not used in this web page, but if you run the script as provided, you are advised to comment out the calls to <code class="language-none">plotms</code>or at least the part which writes a png, see tutors for guidance.</i>
+									<i>If you have a very slow laptop, you are advised to skip some of the <code class="language-none">plotms</code> steps (see the plots linked to this page instead) and, especially, do not use the <code class="language-none">plotms</code> options to write out a PNG. If you run the script as provided, you are advised to comment out the calls to <code class="language-none">plotms</code> or at least the part that writes a PNG; see tutors for guidance.</i>
 								</p>
 							</section>
 							<hr/>
 							<section>
 								<h2>Table of Contents</h2>
 								<p>
-									<b>Important:</b> The numbers in brackets respond to the steps in the accompanying python scripts.
+									<b>Important:</b> The numbers in brackets correspond to the steps in the accompanying Python scripts.
 								</p>
 								<p>
 									<ol>
@@ -90,7 +90,7 @@ onload = function(){
 								<h2 class="alt"><a name="guidance"></a>1. Guidance for calibrating 3C277.1 in CASA</h2>
 								<h4><a name="data"></a>1A. The data and supporting material</h4>
 								<p>
-									You should have alread downloaded the <code class="language-bash">ERIS26_calibration_tutorial.tar.gz</code> file. If you have not done the CASA testing previously, then you will need to unpack this bundle via <code class="language-bash">tar -xvf ERIS26_calibration_tutorial.tar.gz</code>). This should make a folder called <code class="language-bash">ERIS26_calibration</code>. Move into that directory in a command line, and please double check that you have at least the following in your current directory:
+									You should already have downloaded the <code class="language-bash">ERIS26_calibration_tutorial.tar.gz</code> file. If you have not previously completed the CASA testing, you will need to unpack this bundle using <code class="language-bash">tar -xvf ERIS26_calibration_tutorial.tar.gz</code>. This should create a folder called <code class="language-bash">ERIS26_calibration</code>. Move into that directory in a command line, and please double-check that you have at least the following in your current directory:
 
 									<ul>
 										<li><code class="language-bash">all_avg.ms</code> - the data (after conversion to a measurement set).</li>
